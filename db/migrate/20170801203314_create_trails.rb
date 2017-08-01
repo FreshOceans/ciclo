@@ -1,0 +1,16 @@
+class CreateTrails < ActiveRecord::Migration[5.1]
+  def change
+    create_table :trails do |t|
+      t.integer :csv_id
+      t.string :name
+      t.float :length
+      t.string :surface
+      t.float :surface_rating
+      t.float :traffic_rating
+      t.float :scenery_rating
+      t.float :overall_rating
+
+      t.timestamps
+    end
+  end
+end

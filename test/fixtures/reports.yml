@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  surface_rating: 1
+  traffic_rating: 1
+  scenery_rating: 1
+  overall_rating: 1
+  comment: MyText
+
+two:
+  user: two
+  surface_rating: 1
+  traffic_rating: 1
+  scenery_rating: 1
+  overall_rating: 1
+  comment: MyText
