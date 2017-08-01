@@ -1,6 +1,17 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
+
+  # == GET /home
+  def home
+    puts "\n******** home ********"
+    # current_user = nil
+    # puts "*** current_user.inspect: #{current_user.inspect} ***"
+    @users = User.all
+    # puts "*** current_user.inspect: #{current_user.inspect} ****"
+    # puts "*** current_user[:id].inspect: #{current_user[:id].inspect} ****"
+  end
+
   # GET /users
   # GET /users.json
   def index

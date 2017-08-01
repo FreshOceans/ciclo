@@ -1,0 +1,25 @@
+<!-- ======= views/menu ======= -->
+
+<div id="navbar">
+  <a href="/"><h1 id="logo">ciclo</h1></a>
+  <div id="nav-items">
+    <% if current_user %>
+        <!-- <%#= link_to 'Landing', landing_path, class: "nav-item" %> -->
+        <%= link_to 'Trails', trails_path, class: "nav-item" %>
+        <%= link_to 'Profile', user_path(current_user.id), class: "nav-item" %>
+        <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: "nav-item" %>
+        <!-- <p class="nav-item"> <%#= current_user.username %> </p> -->
+    <% elsif current_admin %>
+        <%= link_to 'Admin', admin_landing_path, class: "nav-item" %>
+        <!-- <%= link_to 'Users', "/users", class: "nav-item" %>
+        <%#= link_to 'Trails', "/bars", class: "nav-item" %>
+        <%#= link_to 'Reports', "/admin_reports", class: "nav-item" %>
+        <%#= link_to 'Tags', tags_path, class: "nav-item" %>
+        <%#= link_to 'Locations', "/neighborhoods", class: "nav-item" %> -->
+        <%= link_to 'Signout', destroy_admin_session_path, method: :delete, class: "nav-item" %>
+    <% else %>
+        <%= link_to 'Sign In', new_user_session_path, class: "nav-item" %>
+        <%= link_to 'Register', new_user_registration_path, class: "nav-item" %>
+    <% end %>
+  </div>
+</div>

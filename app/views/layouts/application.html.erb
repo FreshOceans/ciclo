@@ -9,6 +9,19 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div id="menu_container">
+        <%= render :partial => "/users/menu" %>
+    </div>
+    <div id="yield-container">
+        <%= yield %>
+    </div>
+    <div id="footer">
+    <% if notice %>
+        <p id="notice"> <%= notice %> </p>
+    <% end %>
+    <% if alert %>
+        <p id ="alert"> <%= alert %> </p>
+    <% end %>
+  </div>
   </body>
 </html>
