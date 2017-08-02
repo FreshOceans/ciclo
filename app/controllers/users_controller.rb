@@ -25,7 +25,6 @@ class UsersController < ApplicationController
     puts "@radar.inspect #{@radar.inspect}"
   end
 
-  # ======= current user checks clicked user's profile =======
   # GET /check_user
   def check_user
       puts "\n******* check_user *******"

@@ -8,7 +8,6 @@
         <% if current_admin != nil  %>
           <%= link_to 'Edit', edit_trail_path(trail.id) %>
           <%= link_to 'Delete', trail, method: :delete, data: { confirm: 'Are you sure?' } %><br>
-          <%= link_to 'New Trail', new_trail_path %>
         <% end %>
       </div>
     </div>

@@ -12,8 +12,9 @@ Rails.application.routes.draw do
 
   # == Custom Routes
   get "/landing" => "users#landing"
-  get "/weather" => "users#weather_underground"
   get "/admin_landing" => "admins#admin_landing"
+
+  get "/weather" => "users#weather_underground"
   get "/users" => "users#index"
   get "/trails" => "trails#index"
   get "/admin_reports" => "reports#index"
