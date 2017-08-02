@@ -4,16 +4,19 @@ class CountiesController < ApplicationController
   # GET /counties
   # GET /counties.json
   def index
+    puts "\n******** county_index ********"
     @counties = County.all
   end
 
   # GET /counties/1
   # GET /counties/1.json
   def show
+    puts "\n******** county_show ********"
   end
 
   # GET /counties/new
   def new
+    puts "\n******** county_show ********"
     @county = County.new
   end
 
@@ -24,6 +27,7 @@ class CountiesController < ApplicationController
   # POST /counties
   # POST /counties.json
   def create
+    puts "\n******** county_create ********"
     @county = County.new(county_params)
 
     respond_to do |format|
@@ -40,6 +44,7 @@ class CountiesController < ApplicationController
   # PATCH/PUT /counties/1
   # PATCH/PUT /counties/1.json
   def update
+    puts "\n******** county_update ********"
     respond_to do |format|
       if @county.update(county_params)
         format.html { redirect_to @county, notice: 'County was successfully updated.' }
@@ -54,6 +59,7 @@ class CountiesController < ApplicationController
   # DELETE /counties/1
   # DELETE /counties/1.json
   def destroy
+    puts "\n******** county_destroy ********"
     @county.destroy
     respond_to do |format|
       format.html { redirect_to counties_url, notice: 'County was successfully destroyed.' }
@@ -64,11 +70,13 @@ class CountiesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_county
+      puts "\n******** set_county ********"
       @county = County.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def county_params
-      params.fetch(:county, {})
+      puts "\n******** county_params ********"
+    #   params.fetch(:county, {})
     end
 end

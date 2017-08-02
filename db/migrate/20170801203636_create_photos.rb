@@ -10,3 +10,5 @@ class CreatePhotos < ActiveRecord::Migration[5.1]
     end
   end
 end
+
+# < ======= user_id, trail_id, caption:string, content_type:string ======= >

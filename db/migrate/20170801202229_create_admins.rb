@@ -12,3 +12,5 @@ class CreateAdmins < ActiveRecord::Migration[5.1]
     end
   end
 end
+
+# < ======= fname, lname, email, username, password, img_src ======= >

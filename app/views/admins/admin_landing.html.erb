@@ -1,0 +1,6 @@
+<div id="landing_info">
+    <% if @admin.firstname || @admin.lastname != nil %>
+        <p>Welcome Back <%= @admin.firstname %> <%= @admin.lastname %></p>
+        <p>Here's what new</p>
+    <% end %>
+</div>

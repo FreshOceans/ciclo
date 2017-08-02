@@ -14,3 +14,5 @@ class CreateTrails < ActiveRecord::Migration[5.1]
     end
   end
 end
+
+# < ======= csv_id, name, length, surface, surface_ratingm traffic_rating, scenery_rating, overall_rating ======= >

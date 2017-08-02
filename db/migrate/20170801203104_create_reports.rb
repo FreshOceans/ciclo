@@ -12,3 +12,5 @@ class CreateReports < ActiveRecord::Migration[5.1]
     end
   end
 end
+
+# < ======= user_id, surface_rating, traffic_rating,scenery_rating, overall_rating, comment ======= >

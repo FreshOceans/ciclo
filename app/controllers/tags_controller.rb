@@ -4,16 +4,19 @@ class TagsController < ApplicationController
   # GET /tags
   # GET /tags.json
   def index
+    puts "\n******** tags_index ********"
     @tags = Tag.all
   end
 
   # GET /tags/1
   # GET /tags/1.json
   def show
+    puts "\n******** tags_show ********"
   end
 
   # GET /tags/new
   def new
+    puts "\n******** tags_new ********"
     @tag = Tag.new
   end
 
@@ -24,6 +27,7 @@ class TagsController < ApplicationController
   # POST /tags
   # POST /tags.json
   def create
+    puts "\n******** tags_create ********"
     @tag = Tag.new(tag_params)
 
     respond_to do |format|
@@ -40,6 +44,7 @@ class TagsController < ApplicationController
   # PATCH/PUT /tags/1
   # PATCH/PUT /tags/1.json
   def update
+    puts "\n******** tags_update ********"
     respond_to do |format|
       if @tag.update(tag_params)
         format.html { redirect_to @tag, notice: 'Tag was successfully updated.' }
@@ -54,6 +59,7 @@ class TagsController < ApplicationController
   # DELETE /tags/1
   # DELETE /tags/1.json
   def destroy
+    puts "\n******** tags_delete ********"
     @tag.destroy
     respond_to do |format|
       format.html { redirect_to tags_url, notice: 'Tag was successfully destroyed.' }
@@ -64,11 +70,14 @@ class TagsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_tag
+      puts "\n******** set_tag ********"
       @tag = Tag.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tag_params
-      params.fetch(:tag, {})
+      puts "\n******** tag_params ********"
+    #   params.fetch(:tag, {})
+        params.require(:tag).permit(:name)
     end
 end

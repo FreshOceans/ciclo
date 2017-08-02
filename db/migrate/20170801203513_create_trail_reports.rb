@@ -8,3 +8,5 @@ class CreateTrailReports < ActiveRecord::Migration[5.1]
     end
   end
 end
+
+# < ======= trail_id, report_id ======= >

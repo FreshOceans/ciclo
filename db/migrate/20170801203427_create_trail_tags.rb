@@ -8,3 +8,5 @@ class CreateTrailTags < ActiveRecord::Migration[5.1]
     end
   end
 end
+
+# < ======= trail_id, tag_id ======= >

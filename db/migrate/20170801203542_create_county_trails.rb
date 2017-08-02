@@ -8,3 +8,5 @@ class CreateCountyTrails < ActiveRecord::Migration[5.1]
     end
   end
 end
+
+# < ======= county_id, trail_id ======= >

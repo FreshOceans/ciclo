@@ -4,34 +4,84 @@ class TrailsController < ApplicationController
   # GET /trails
   # GET /trails.json
   def index
+    puts "\n******** trail_index ********"
     @trails = Trail.all
   end
 
   # GET /trails/1
   # GET /trails/1.json
   def show
+    puts "\n******** trail_show ********"
+    puts "*** params.inspect: #{params.inspect} ***"
+    @user = User.find(current_user.id)
+    @reports = @trail.reports
+    puts "*** @reports.inspect: #{@reports.inspect} ***"
+    @report = Report.new
+    @tags = @trail.tags
+    puts "*** @tags.inspect, #{@tags.inspect} ***"
+    session[:trail_id] = @trail.id
+    surface_accumulator = 0
+    traffic_accumulator = 0
+    scenery_accumulator = 0
+    overall_rating_accumulator = 0
+    @reports.each do |report|
+        surface_accumulator += report.surface_price
+        traffic_accumulator += report.traffic_price
+        scenery_accumulator += report.scenery_price
+        overall_rating_accumulator += report.overall_rating
+    end
+    if @reports.length > 0
+        @beer_avg = beer_accumulator / @reports.length
+        @traffic_avg = traffic_accumulator / @reports.length
+        @scenery_avg = scenery_accumulator /
+        @overall_rating_avg = overall_rating_accumulator / @reports.length
+    else
+        @beer_avg = 0
+        @traffic_avg = 0
+        @scenery_avg = 0
+        @overall_rating_avg = 0
+    end
+    puts "***== @trail.inspect, #{@trail.inspect} ==***"
+
+    # puts "@surface_avg: #{@surface_avg}"
+    # puts "@traffic_avg: #{@wine_avg}"
+    # puts "@scenery_avg: #{@scenery_avg}"
+    # puts "@overall_rating_avg: #{@overall_rating_avg}"
+    # puts "*** session[:trail_id].inspect: #{session[:trail_id].inspect} ***"
+    # puts "***== @user.inspect, #{@user.inspect} ==***"
   end
 
   # GET /trails/new
   def new
-    @trail = Trail.new
+      puts "\n******** trail_new ********"
+      @counties = County.all
+      @trail = Trail.new
+      @tags = Tag.all
+      puts "*** @county.inspect: #{@county.inspect} ***"
   end
 
   # GET /trails/1/edit
   def edit
+    puts "\n******** trail_edit ********"
   end
 
   # POST /trails
   # POST /trails.json
   def create
+    puts "\n******** trail_create ********"
     @trail = Trail.new(trail_params)
 
     respond_to do |format|
       if @trail.save
+        puts "+++ Trail Success +++"
+        @new_trail = Trail.order("created_at").last
+        puts "+++ @new_trail: #{@new_tail} +++"
+        format.html { redirect_to trail_path(@new_trail.id)}
         format.html { redirect_to @trail, notice: 'Trail was successfully created.' }
         format.json { render :show, status: :created, location: @trail }
       else
-        format.html { render :new }
+        puts "+++ Trail Fail +++"
+        format.html { render :new, notice: 'Trail creation failed.' }
         format.json { render json: @trail.errors, status: :unprocessable_entity }
       end
     end
@@ -54,6 +104,7 @@ class TrailsController < ApplicationController
   # DELETE /trails/1
   # DELETE /trails/1.json
   def destroy
+    puts "\n******** trail_delete ********"
     @trail.destroy
     respond_to do |format|
       format.html { redirect_to trails_url, notice: 'Trail was successfully destroyed.' }
@@ -64,11 +115,14 @@ class TrailsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_trail
+      puts "\n******** set_trail ********"
       @trail = Trail.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def trail_params
-      params.fetch(:trail, {})
+      puts "\n******** trail_params ********"
+    #   params.fetch(:trail, {})
+      params.require(:trail).permit(:county_id, :csv_id, :name, :length, :surface, :surface_rating, :traffic_rating, :scenery_rating, :overall_rating)
     end
 end

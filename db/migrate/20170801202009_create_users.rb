@@ -12,3 +12,5 @@ class CreateUsers < ActiveRecord::Migration[5.1]
     end
   end
 end
+
+# < ======= firstname, lastname, email, username, password, img_src ======= >

@@ -7,7 +7,15 @@ Rails.application.routes.draw do
 
   # == Custom routes
   root to: "users#home"
-
+  get "/landing" => "users#landing"
+  get "/admin_landing" => "admins#admin_landing"
+  get "/users" => "users#index"
+  get "/trails" => "trails#index"
+  get "/admin_reports" => "reports#index"
+  get "/counties" => "county#index"
+  get "/user_reports/:id" => "users#user_reports"
+  get "/admin" => "admins#home"
+  get "/admin/users/:id" => "admins#admin_user"
 
   # == RESTful Routes
   resources :users do
