@@ -30,15 +30,13 @@ class TagsController < ApplicationController
     puts "\n******** tags_create ********"
     @tag = Tag.new(tag_params)
 
-    respond_to do |format|
       if @tag.save
-        format.html { redirect_to @tag, notice: 'Tag was successfully created.' }
+        format.html { redirect_to tags_path, notice: 'Tag was successfully created.' }
         format.json { render :show, status: :created, location: @tag }
       else
         format.html { render :new }
         format.json { render json: @tag.errors, status: :unprocessable_entity }
       end
-    end
   end
 
   # PATCH/PUT /tags/1
@@ -47,7 +45,7 @@ class TagsController < ApplicationController
     puts "\n******** tags_update ********"
     respond_to do |format|
       if @tag.update(tag_params)
-        format.html { redirect_to @tag, notice: 'Tag was successfully updated.' }
+        format.html { redirect_to tags_path,, notice: 'Tag was successfully updated.' }
         format.json { render :show, status: :ok, location: @tag }
       else
         format.html { render :edit }
@@ -78,6 +76,6 @@ class TagsController < ApplicationController
     def tag_params
       puts "\n******** tag_params ********"
     #   params.fetch(:tag, {})
-        params.require(:tag).permit(:name)
+        params.require(:tag).permit(:category_name)
     end
 end

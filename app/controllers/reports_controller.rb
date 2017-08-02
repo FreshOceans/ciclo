@@ -55,7 +55,7 @@ class ReportsController < ApplicationController
         format.json { render :show, status: :created, location: @report }
       else
         puts "+++ Report Fail +++"
-        format.html { redirect_to '/', notice: 'Report was not created.' }
+        format.html { redirect_to trails_path, notice: 'Report was not created.' }
         # format.html { render :new }
         format.json { render json: @report.errors, status: :unprocessable_entity }
       end

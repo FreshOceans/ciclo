@@ -1,13 +1,13 @@
 class AdminsController < ApplicationController
   before_action :set_admin, only: [:show, :edit, :update, :destroy]
 
+  # == GET /home
   def home
     puts "\n******** home ********"
     current_admin = nil
     puts "*** current_admin.inspect: #{current_admin.inspect} ***"
     @admins = Admin.all
     puts "*** current_admin.inspect: #{current_admin.inspect} ****"
-    # puts "*** current_user[:id].inspect: #{current_user[:id].inspect} ****"
   end
 
   # == GET /landing

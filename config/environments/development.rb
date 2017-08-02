@@ -1,6 +1,24 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+    # # == key values set as constants (loaded from system)
+    # config.secret_key_base     = ENV["SECRET_KEY_BASE"]
+
+    #  ======= WEATHER UNDERGROUND =======
+    WEATHER_UNDERGROUND_KEY = Rails.application.secrets.WEATHER_UNDERGROUND_KEY
+
+    #  ======= GOOGLE MAPS =======
+    # GOOGLE_PLACES_KEY          = Rails.application.secrets.GOOGLE_PLACES_KEY
+    # GOOGLE_JS_KEY              = Rails.application.secrets.GOOGLE_JS_KEY
+    # GOOGLE_MAPS_KEY             = Rails.application.secrets.GOOGLE_MAPS_KEY
+
+    #  ======= AWS =======
+    # AWS_REGION = Rails.application.secrets.AWS_REGION
+    # S3_BUCKET = Rails.application.secrets.S3_BUCKET
+    # AWS_ACCESS_KEY_ID = Rails.application.secrets.AWS_ACCESS_KEY_ID
+    # AWS_SECRET_ACCESS_KEY = Rails.application.secrets.AWS_SECRET_ACCESS_KEY
+
+
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.

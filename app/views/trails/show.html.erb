@@ -1,4 +1,100 @@
-<p id="notice"><%= notice %></p>
+<h1 class="header">Trail Detail</h1>
+<div id="trail-detail-wrapper">
+  <p id="notice"><%= notice %></p>
+  <div id="info-map-div">
+    <div id="trail-info-container">
+      <div id="trail-name-container">
+        <p id="trail-name"><%= @trail.name %></p>
+      </div>
+      <div id="trail-tag-container">
+        <% if @tags == nil %>
+            <p id="trail-tag"><%= @tags.first.category_name %></p>
+        <% end %>
+      </div>
 
-<%= link_to 'Edit', edit_trail_path(@trail) %> |
-<%= link_to 'Back', trails_path %>
+      <!-- Average Bar Rating display - functions 100% -->
+        <!-- <div id="trail-rating-container">
+          <p id="trail-rating"><%= @rating_avg %></p>
+        </div> -->
+
+      <div id="trail-rating-container">
+        <div id="trail-icon-wrapper">
+          <div class="icon-box">
+            <!-- <img src="/assets/beer.png" alt="Surface"> -->
+          </div>
+          <div class="icon-box">
+            <!-- <img src="/assets/wine.png" alt="Traffic"> -->
+          </div>
+          <div class="icon-box">
+            <!-- <img src="/assets/cocktail.png" alt="Scenery"> -->
+          </div>
+        </div>
+        <div id="rating-wrapper">
+          <div class="rating-box">
+            <p class="rating" id="surface-rating"><%= @surface_avg %></p>
+          </div>
+          <div class="rating-box">
+            <p class="rating" id="traffic-rating"><%= @traffic_avg %></p>
+          </div>
+          <div class="rating-box">
+            <p class="rating" id="scenery-rating"><%= @scenery_avg %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div id="map-container">
+      <iframe width="100%" height="100%" frameborder="0" style="border:0" src="<%= @src %>" allowfullscreen></iframe>
+    </div> -->
+  </div>
+
+  <div id="ratings-area">
+    <% if @reports.length > 0 %>
+        <% @reports.each do |report| %>
+        <% local_user = User.find(report[:user_id]) %>
+        <% puts "report.inspect #{report.inspect}"  %>
+          <div id="rating">
+            <div class="rating-top">
+              <div class="left-info">
+                <img id="thumbnail" src="" alt="">
+                <div class="name-post-data">
+                    <p class="rater-name"><%= link_to local_user.username, "/check_user/#{local_user.id}" %></p>
+                    <p class="rater-date"><%= report.created_at.localtime.strftime("On %b %d, %Y at %I:%M%p") %></p>
+                    <p class="rater-date"> Rating for <%= report.trails.first.name %>: <%= report.overall_rating %></p>
+                </div>
+              </div>
+              <!-- <%#= report.rating %> -->
+              <div class="right-info">
+                <div class="report-icon-container">
+                  <div class="report-icon-box">
+                    <!-- <img src="/assets/beer.png" alt="Wine"> -->
+                  </div>
+                  <div class="report-icon-box">
+                    <!-- <img src="/assets/wine.png" alt="Wine"> -->
+                  </div>
+                  <div class="report-icon-box">
+                    <!-- <img src="/assets/cocktail.png" alt="Wine"> -->
+                  </div>
+                </div>
+                <div class="report-rating-container">
+                  <div class="report-rating-box">
+                    <p class="report-rating"><%= report.surface_rating %></p>
+                  </div>
+                  <div class="report-rating-box">
+                    <p class="report-rating"><%= report.traffic_rating %> </p>
+                  </div>
+                  <div class="report-rating-box">
+                    <p class="report-rating"><%= report.scenery_rating %></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="rating-bottom">
+              <div class="rating-comment-container"><p class="rating-comment"><%= report.comment %> </p></div>
+            </div>
+          </div>
+        <% end %>
+    <% end %>
+    <%= render :partial => 'reports/form' %>
+  </div>
+</div>

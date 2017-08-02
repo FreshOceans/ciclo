@@ -25,30 +25,29 @@ class TrailsController < ApplicationController
     scenery_accumulator = 0
     overall_rating_accumulator = 0
     @reports.each do |report|
-        surface_accumulator += report.surface_price
-        traffic_accumulator += report.traffic_price
-        scenery_accumulator += report.scenery_price
+        surface_accumulator += report.surface_rating
+        traffic_accumulator += report.traffic_rating
+        scenery_accumulator += report.scenery_rating
         overall_rating_accumulator += report.overall_rating
     end
     if @reports.length > 0
-        @beer_avg = beer_accumulator / @reports.length
+        @surface_avg = surface_accumulator / @reports.length
         @traffic_avg = traffic_accumulator / @reports.length
-        @scenery_avg = scenery_accumulator /
+        @scenery_avg = scenery_accumulator / @reports.length
         @overall_rating_avg = overall_rating_accumulator / @reports.length
     else
-        @beer_avg = 0
+        @surface_avg = 0
         @traffic_avg = 0
         @scenery_avg = 0
         @overall_rating_avg = 0
     end
     puts "***== @trail.inspect, #{@trail.inspect} ==***"
-
-    # puts "@surface_avg: #{@surface_avg}"
-    # puts "@traffic_avg: #{@wine_avg}"
-    # puts "@scenery_avg: #{@scenery_avg}"
-    # puts "@overall_rating_avg: #{@overall_rating_avg}"
-    # puts "*** session[:trail_id].inspect: #{session[:trail_id].inspect} ***"
-    # puts "***== @user.inspect, #{@user.inspect} ==***"
+    puts "@surface_avg: #{@surface_avg}"
+    puts "@traffic_avg: #{@wine_avg}"
+    puts "@scenery_avg: #{@scenery_avg}"
+    puts "@overall_rating_avg: #{@overall_rating_avg}"
+    puts "*** session[:trail_id].inspect: #{session[:trail_id].inspect} ***"
+    puts "***== @user.inspect, #{@user.inspect} ==***"
   end
 
   # GET /trails/new

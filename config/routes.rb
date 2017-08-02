@@ -5,9 +5,14 @@ Rails.application.routes.draw do
   devise_for :users, path: 'users', controllers: { sessions: "users/sessions", registrations: "users/registrations" }
   devise_for :admins, path: 'admins', controllers: { sessions: "admins/sessions", registrations: "admins/registrations" }
 
-  # == Custom routes
+  # authenticated :user do
+  #     root :to => "users#home"
+  # end
   root to: "users#home"
+
+  # == Custom Routes
   get "/landing" => "users#landing"
+  get "/weather" => "users#weather_underground"
   get "/admin_landing" => "admins#admin_landing"
   get "/users" => "users#index"
   get "/trails" => "trails#index"
@@ -21,7 +26,7 @@ Rails.application.routes.draw do
   resources :users do
      resources :reports
   end
-  resources :admins
+  # resources :admins
   resources :trails
   resources :counties
   resources :photos

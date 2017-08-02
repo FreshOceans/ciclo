@@ -4,6 +4,7 @@
   <a href="/"><h1 id="logo">ciclo</h1></a>
   <div id="nav-items">
     <% if current_user %>
+        <%= link_to 'Weather', weather_path, class: "nav-item" %>
         <%= link_to 'Landing', landing_path, class: "nav-item" %>
         <%= link_to 'Trails', trails_path, class: "nav-item" %>
         <%= link_to 'Profile', user_path(current_user.id), class: "nav-item" %>

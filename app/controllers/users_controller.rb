@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-
+  include Wunderground
 
   # == GET /home
   def home
@@ -9,7 +9,29 @@ class UsersController < ApplicationController
     puts "*** current_user.inspect: #{current_user.inspect} ***"
     @users = User.all
     puts "*** current_user.inspect: #{current_user.inspect} ****"
-    puts "*** current_user[:id].inspect: #{current_user[:id].inspect} ****"
+    # puts "*** current_user[:id].inspect: #{current_user[:id].inspect} ****"
+  end
+
+  # == GET /landing
+  def landing
+    puts "\n******** landing ********"
+    @user = User.find(current_user.id)
+  end
+
+  # == GET /weather_underground
+  def weather_underground
+    puts "\n******** weather_underground ********"
+    @radar = Wunderground.animated_radar_api_response
+    puts "@radar.inspect #{@radar.inspect}"
+  end
+
+  # ======= current user checks clicked user's profile =======
+  # GET /check_user
+  def check_user
+      puts "\n******* check_user *******"
+      @check_user = User.find(params[:id])
+      @check_user_reports = Report.where(user_id: @check_user.id)
+      puts "******* @check_user_reports: #{@check_user_reports.inspect}"
   end
 
   # GET /users

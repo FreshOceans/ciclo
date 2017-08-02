@@ -1,17 +1,45 @@
-<%= form_with(model: report, local: true) do |form| %>
-  <% if report.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(report.errors.count, "error") %> prohibited this report from being saved:</h2>
+<% puts "++== before  @report.inspect #{@report.inspect} ++==" %>
+<%= form_for([@user, @report]) do |form| %>
+<% puts "++== after @report.inspect #{@report.inspect} ++==" %>
 
-      <ul>
-      <% report.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+  <div id="rating-form">
+    <div class="rating-form-top">
+      <div class="rating-form-left-info">
+        <div id="new-rating-header">Add a New Report!</div>
+        <div id="rating-form-rating-select">
+          <% rating_score = [ [ "1", 1, {class: 'rating-option'} ], [ "2", 2, {class: 'rating-option'} ], [ "3", 3, {class: 'rating-option'} ], [ "4", 4, {class: 'rating-option'} ], [ "5", 5, {class: 'rating-option'} ] ] %>
+          <%= select("report", :overall_rating, options_for_select(rating_score), id: "rating-drop-down", class: "data-value")%>
+        </div>
+      </div>
+      <div class="rating-form-right-info">
+        <div class="rating-form-icon-container">
+          <div class="rating-form-icon-box">
+            <!-- <img src="/assets/beer.png" alt="Wine"> -->
+          </div>
+          <div class="rating-form-icon-box">
+            <!-- <img src="/assets/wine.png" alt="Wine"> -->
+          </div>
+          <div class="rating-form-icon-box">
+            <!-- <img src="/assets/cocktail.png" alt="Wine"> -->
+          </div>
+        </div>
+        <div class="rating-form-rating-container">
+            <% rating_score = [ [ "1", 1, {class: 'rating-option'} ], [ "2", 2, {class: 'rating-option'} ], [ "3", 3, {class: 'rating-option'} ], [ "4", 4, {class: 'rating-option'} ], [ "5", 5, {class: 'rating-option'} ] ] %>
+            <div class="rating-form-rating-box">
+                <%= select("report", :surface_rating, options_for_select(rating_score), id: "surface-drop-down")%>
+            </div>
+            <div class="rating-form-rating-box">
+                <%= select("report", :traffic_rating, options_for_select(rating_score), id: "traffic-drop-down")%>
+            </div>
+            <div class="rating-form-rating-box">
+                <%= select("report", :scenery_rating, options_for_select(rating_score), id: "scenery-drop-down")%>
+            </div>
+        </div>
+      </div>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= form.submit %>
+    <div class="rating-form-bottom">
+      <textarea id="comment" class="rating-form-comment-area" name="report[comment]" maxlength="150" rows="8" cols="80" placeholder="What did you think about this trail?"></textarea>
+      <%= form.submit "Submit", class: "submit_btn" %>
+    </div>
   </div>
 <% end %>

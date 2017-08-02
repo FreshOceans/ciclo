@@ -1,0 +1,54 @@
+<!-- ====== views/admins/admin_user.html.erb ====== -->
+
+<p id="notice"><%= notice %></p>
+
+<h1><%= @users.fname %> <%= @users.lname %>'s Profile</h1>
+<h2>Admin is looking at this</h2>
+
+<!-- ======= ======= ======= USER PROFILE CONTAINER ======= ======= =======-->
+<div id="user-profile-container" class="user-profile">
+    <!-- ======= ======= USER PROFILE PIC ======= ======= -->
+    <div id="user-profile-pic">
+        <!-- <%#= image_tag(@photo.id.image.url) %> -->
+    </div>
+
+    <!-- ======= ======= USER BASIC INFO BOX ======= ======= -->
+    <div id="user-profile-info">
+        <!-- ====== USER FIRST NAME ======= -->
+        <div id="user-info-fname" class="user-info">
+            <p> First Name: <br><%= @users.fname %></p>
+        </div>
+
+        <!-- ====== USER LAST NAME ======= -->
+        <div id="user-info-lname" class="user-info">
+            <p> Last Name: <br><%= @users.lname %></p>
+        </div>
+
+        <!-- ====== USER USERNAME ======= -->
+        <div id="user-info-username" class="user-info">
+            <p> Username: <br><%= @users.username %></p>
+        </div>
+
+        <!-- ====== USER EMAIL ======= -->
+        <div id="user-info-email" class="user-info">
+            <p> Email: <br><%= @users.email %></p>
+        </div>
+        <%= link_to 'Edit Profile', edit_user_registration_path %>
+    </div>
+
+    <!-- ======= ======= ======= USER BAR REPORTS BOX ======= ======= ======= -->
+    <div>
+        <h2>Trail Reports</h2>
+        <% @user_reports.each do |r| %>
+            <div>
+                <%#= link_to r.bars.first.name, bar_path %> <br>       <!-- send the user to the clicked bar profile -->
+                Surface: x<%#= r.beer_price %>
+                Traffic: x<%#= r.wine_price %>
+                Scenery: x<%#= r.cocktails_price %>
+                Overall Rating: x<%#= r.rating %> <br>
+                <%#= r.comment %>
+            </div> </br>
+        <% end %>
+    </div>
+
+</div>

@@ -1,46 +1,39 @@
-<h1 class="header"><%= current_user.username %></h1>
+<!-- ====== views/users/check_user.html.erb ====== -->
+
+<p id="notice"><%= notice %></p>
 <div id="detail-wrapper">
-    <!-- No need for notice here if notice is on layouts page. -->
-  <!-- <p id="notice"><%#= notice %></p> -->
+  <div class="profile-name-container">
+    <h1 class="profile-name"><%= @check_user.username %></h1>
+  </div>
   <div id="detail-container">
     <div id="left-top-area">
       <div class="form-div">
         <p id="item-display">
-          <span class="item-label">First Name:</span> <span class="item"><%= current_user.fname %></span>
+          <span class="item-label">First Name:</span> <span class="item"><%= @check_user.fname %></span>
         </p>
       </div>
       <div class="form-div">
         <p id="item-display">
-          <span class="item-label">Last Name:</span> <span class="item"><%= current_user.lname %></span>
+          <span class="item-label">Last Name:</span> <span class="item"><%= @check_user.lname %></span>
         </p>
       </div>
       <div class="form-div">
         <p id="item-display">
-          <span class="item-label">Email:</span> <span class="item"><%= current_user.email %></span>
+          <span class="item-label">Email:</span> <span class="item"><%= @check_user.email %></span>
         </p>
       </div>
-      <div class="form-div">
-        <%= link_to 'Edit Profile', edit_user_registration_path, class: "form-btn" %>
-      </div>
     </div>
-    <div id="right-bottom-area">
-      <%# if @photo != nil %>
-          <%#= image_tag(@photo.image.url) %>
-      <%# end %>
-    </div>
-    <div class="form-div">
-      <p id="item-display">
-        <span class="item-label">Profile Photo:</span> <span class="item"><%= link_to 'New Photo', new_photo_path, class: "nav-item" %></span>
-      </p>
+    <div id="right-bottom-area">[photo]
+      <!-- <%#= image_tag(@photo.id.image.url) %> -->
     </div>
   </div>
   <div id="ratings-area">
-    <% @user_reports.each do |r| %>
+    <% @check_user_reports.each do |r| %>
       <div class="rating">
         <div class="rating-top">
           <div class="left-info">
             <div class="quarter-div">
-              <span class="rating-label">Trail:</span>
+              <span class="rating-label">Bar:</span>
               <%= link_to r.trails.first.name, trail_path(r.trails.first.id), class: "rating-trail-name" %>
             </div>
             <div class="quarter-div">
@@ -61,13 +54,13 @@
             </div>
             <div class="report-rating-container">
               <div class="report-rating-box">
-                <p class="report-rating"><%= r.surface_rating %></p>
+                <p class="report-rating">$<%= r.surface_rating %></p>
               </div>
               <div class="report-rating-box">
-                <p class="report-rating"><%= r.traffic_rating %></p>
+                <p class="report-rating">$<%= r.traffic_rating %></p>
               </div>
               <div class="report-rating-box">
-                <p class="report-rating"><%= r.scenery_rating %></p>
+                <p class="report-rating">$<%= r.scenery_rating %></p>
               </div>
             </div>
           </div>
