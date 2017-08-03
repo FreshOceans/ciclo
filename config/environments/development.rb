@@ -8,9 +8,10 @@ Rails.application.configure do
     WEATHER_UNDERGROUND_KEY = Rails.application.secrets.WEATHER_UNDERGROUND_KEY
 
     #  ======= GOOGLE MAPS =======
-    # GOOGLE_PLACES_KEY          = Rails.application.secrets.GOOGLE_PLACES_KEY
-    # GOOGLE_JS_KEY              = Rails.application.secrets.GOOGLE_JS_KEY
-    # GOOGLE_MAPS_KEY             = Rails.application.secrets.GOOGLE_MAPS_KEY
+    GOOGLE_PLACES_KEY          = Rails.application.secrets.GOOGLE_PLACES_KEY
+    GOOGLE_JS_KEY              = Rails.application.secrets.GOOGLE_JS_KEY
+    GOOGLE_MAPS_KEY             = Rails.application.secrets.GOOGLE_MAPS_KEY
+    GOOGLE_DIRECTIONS_KEY = Rails.application.secrets.GOOGLE_DIRECTIONS_KEY
 
     #  ======= AWS =======
     AWS_REGION = Rails.application.secrets.AWS_REGION

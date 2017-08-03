@@ -12,16 +12,18 @@ Rails.application.routes.draw do
 
   # == Custom Routes
   get "/landing" => "users#landing"
-  get "/admin_landing" => "admins#admin_landing"
+  get "/user_reports/:id" => "users#user_reports"
 
   get "/weather" => "users#weather_underground"
+
+  # = Admin Routes
+  get "/admin" => "admins#home"
+  get "/admin_landing" => "admins#admin_landing"
+  get "/admin/users/:id" => "admins#admin_user"
+  get "/admin_reports" => "reports#index"
   get "/users" => "users#index"
   get "/trails" => "trails#index"
-  get "/admin_reports" => "reports#index"
   get "/counties" => "county#index"
-  get "/user_reports/:id" => "users#user_reports"
-  get "/admin" => "admins#home"
-  get "/admin/users/:id" => "admins#admin_user"
 
   # == RESTful Routes
   resources :users do

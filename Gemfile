@@ -14,7 +14,6 @@ gem 'aws-sdk'
 gem 'httparty'
 gem 'jquery-rails'
 gem 'gon'
-# gem 'wunderground'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.2'

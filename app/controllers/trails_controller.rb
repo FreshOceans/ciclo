@@ -13,6 +13,7 @@ class TrailsController < ApplicationController
   def show
     puts "\n******** trail_show ********"
     puts "*** params.inspect: #{params.inspect} ***"
+    gon.js_presence = true
     @user = User.find(current_user.id)
     @reports = @trail.reports
     puts "*** @reports.inspect: #{@reports.inspect} ***"
@@ -41,6 +42,7 @@ class TrailsController < ApplicationController
         @scenery_avg = 0
         @overall_rating_avg = 0
     end
+
     puts "***== @trail.inspect, #{@trail.inspect} ==***"
     puts "@surface_avg: #{@surface_avg}"
     puts "@traffic_avg: #{@wine_avg}"
