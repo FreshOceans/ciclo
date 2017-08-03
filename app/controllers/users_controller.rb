@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  include Wunderground
+  # include Wunderground
 
   # == GET /home
   def home
@@ -45,7 +45,7 @@ class UsersController < ApplicationController
   def show
     puts "\n******** user_show ********"
     @user = User.find(params[:id])
-    # @photo = Photo.where(user_id: current_user.id).first
+    @photo = Photo.where(user_id: current_user.id).first
     @user_reports = Report.where(user_id: current_user.id)
     puts "******* @user_reports: #{@user_reports.inspect}"
   end

@@ -13,10 +13,10 @@ Rails.application.configure do
     # GOOGLE_MAPS_KEY             = Rails.application.secrets.GOOGLE_MAPS_KEY
 
     #  ======= AWS =======
-    # AWS_REGION = Rails.application.secrets.AWS_REGION
-    # S3_BUCKET = Rails.application.secrets.S3_BUCKET
-    # AWS_ACCESS_KEY_ID = Rails.application.secrets.AWS_ACCESS_KEY_ID
-    # AWS_SECRET_ACCESS_KEY = Rails.application.secrets.AWS_SECRET_ACCESS_KEY
+    AWS_REGION = Rails.application.secrets.AWS_REGION
+    S3_BUCKET = Rails.application.secrets.S3_BUCKET
+    AWS_ACCESS_KEY_ID = Rails.application.secrets.AWS_ACCESS_KEY_ID
+    AWS_SECRET_ACCESS_KEY = Rails.application.secrets.AWS_SECRET_ACCESS_KEY
 
 
   # In the development environment your application's code is reloaded on

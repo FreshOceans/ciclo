@@ -42,11 +42,11 @@ class PhotosController < ApplicationController
 
     respond_to do |format|
       if @photo.save
-        puts "+++ photos_success +++"
+        puts "+++ Photo Success +++"
         format.html { redirect_to user_path(current_user.id), notice: 'Photo was successfully created.' }
         format.json { render :show, status: :created, location: @photo }
       else
-        puts "+++ photos_failure +++"
+        puts "+++ Photo Failure +++"
         format.html { render :new, notice: 'Photo was not added.' }
         format.json { render json: @photo.errors, status: :unprocessable_entity }
       end
