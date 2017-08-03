@@ -51,6 +51,30 @@ $break: 780px;
           color: $font-color;
         }
       }
+      #trail-length-container{
+        box-sizing: border-box;
+        height: 30px;
+        margin-top: 5px;
+        text-align: center;
+        #trail-length{
+            margin: 0;
+            font-size: 14px;
+            line-height: 30px;
+            font-family: $raleway;
+        }
+      }
+      #trail-surface-container{
+        box-sizing: border-box;
+        height: 30px;
+        margin-top: 5px;
+        text-align: center;
+        #trail-surface{
+            margin: 0;
+            font-size: 14px;
+            line-height: 30px;
+            font-family: $raleway;
+        }
+      }
       #trail-tag-container{
         box-sizing: border-box;
         height: 30px;
