@@ -21,6 +21,7 @@ $(document).ready(function() {
                     var trailCenter = foundTrail.geometry.coordinates[centerIndex];
                     console.log("trailCenter", trailCenter);
                     generateMap(trailCenter);
+
                 });
             };
             function extractTrail(data) {
@@ -75,6 +76,12 @@ $(document).ready(function() {
                 //         });
                 //     }
                 // });
+                map.data.setStyle({
+                    strokeColor: 'limegreen',
+                    strokeWeight: 3,
+                    strokeOpacity: 0.65
+                });
+                map.data.loadGeoJson('/DC_Bike_Trails.geojson');
             };
         };
     }
