@@ -1,4 +1,5 @@
-$(document).ready(function() {
+// $(document).ready(function() {
+$(document).on('turbolinks:load', function() {
     if (gon.js_presence == true) {
         console.log("gon.js_presence:", gon.js_presence);
         if (gon.js_presence) {
