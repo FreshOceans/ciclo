@@ -13,14 +13,16 @@ $(document).ready(function() {
                 }).done (function(data) {
                     console.log("== done ==");
                     var dataParsed = $.parseJSON(data);
-                    console.log("+ dataParsed +", dataParsed);
+                    console.log("dataParsed:", dataParsed);
                     var foundTrail = extractTrail(dataParsed);
                     console.log("foundTrail:", foundTrail);
+                    var trailFeature = {"type":"FeatureCollection","features":[foundTrail]}
+                    console.log("trailFeature:", trailFeature);
                     var centerIndex = Math.floor(foundTrail.geometry.coordinates.length / 2);
-                    console.log("== centerIndex ==", centerIndex);
+                    console.log("centerIndex:", centerIndex);
                     var trailCenter = foundTrail.geometry.coordinates[centerIndex];
-                    console.log("trailCenter", trailCenter);
-                    generateMap(trailCenter);
+                    console.log("trailCenter:", trailCenter);
+                    generateMap(trailCenter, trailFeature);
 
                 });
             };
@@ -40,7 +42,7 @@ $(document).ready(function() {
                 });
                 return foundTrailData
             };
-            function generateMap(trailCenter) {
+            function generateMap(trailCenter, trailFeature) {
                 var mapContainer = document.getElementById('map-container');
                 latLng = { lat: trailCenter[1], lng: trailCenter[0]};
                 console.log("== latLng", latLng);
@@ -81,7 +83,8 @@ $(document).ready(function() {
                     strokeWeight: 3,
                     strokeOpacity: 0.65
                 });
-                map.data.loadGeoJson('/DC_Bike_Trails.geojson');
+                // map.data.loadGeoJson(foundTrail);
+                map.data.addGeoJson(trailFeature);
             };
         };
     }
