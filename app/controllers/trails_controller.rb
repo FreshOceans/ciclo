@@ -14,6 +14,8 @@ class TrailsController < ApplicationController
     puts "\n******** trail_show ********"
     puts "*** params.inspect: #{params.inspect} ***"
     gon.js_presence = true
+    gon.selected_trail = @trail.name
+    puts "*** gon.selected_trail: #{gon.selected_trail.inspect} ***" 
     @user = User.find(current_user.id)
     @reports = @trail.reports
     puts "*** @reports.inspect: #{@reports.inspect} ***"

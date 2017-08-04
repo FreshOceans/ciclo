@@ -45,6 +45,35 @@ $(document).ready(function() {
             //     }
             // });
 
+            function trailAjaxQueue() {
+                console.log("== trailAjaxQueue ==");
+                var trailData = null;
+
+                $.ajax({
+                    url: '/DC_Bike_Trails.geojson',
+                    method: "GET",
+                    dataType: "text",
+                    // success: function(data) {processData(data);}
+                }).done (function(data) {
+                    console.log("== done ==");
+                    var dataParsed = $.parseJSON(data)
+                    extractTrail(dataParsed);
+                });
+                function extractTrail(data) {
+                    console.log("== extractTrail ==");
+                    console.log("data.features", data.features);
+                    $.each(data.features, function(index, trail) {
+                        if (trail.NAME == gon.selected_trail) {
+                            console.log("++ Found Trail ++");
+                        }
+                    });
+                }
+
+            }
+
+
         }
     }
+
+    trailAjaxQueue();
 }); //End of jQuery
