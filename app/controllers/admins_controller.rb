@@ -1,5 +1,6 @@
 class AdminsController < ApplicationController
   before_action :set_admin, only: [:show, :edit, :update, :destroy]
+  include Trailseed
 
   # == GET /home
   def home
@@ -9,6 +10,15 @@ class AdminsController < ApplicationController
     @admins = Admin.all
     puts "*** current_admin.inspect: #{current_admin.inspect} ****"
   end
+
+  # == GET /trail_database
+  def trail_database
+    puts "\n******** trail_database ********"
+    Trail.destroy_all
+    @seed = Trailseed.trail_seed
+    # puts "@seed.inspect #{@seed.inspect}"
+  end
+
 
   # == GET /landing
   def admin_landing

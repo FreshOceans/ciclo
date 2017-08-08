@@ -17,18 +17,24 @@ $(document).on('turbolinks:load', function() {
                     console.log("dataParsed:", dataParsed);
                     var foundTrail = extractTrail(dataParsed);
                     console.log("foundTrail:", foundTrail);
-                    var trailFeature = {"type":"FeatureCollection","features":[foundTrail]}
+                    foundTrailData = foundTrail[0]
+                    totalTrailData = foundTrail[1]
+                    foundTrailData.geometry.coordinates = totalTrailData
+                    var trailFeature = {"type":"FeatureCollection","features":[foundTrailData]}
                     console.log("trailFeature:", trailFeature);
-                    var centerIndex = Math.floor(foundTrail.geometry.coordinates.length / 2);
+                    var centerIndex = Math.floor(foundTrailData.geometry.coordinates.length / 2);
                     console.log("centerIndex:", centerIndex);
-                    var trailCenter = foundTrail.geometry.coordinates[centerIndex];
+                    var centerIndexV2 = Math.floor(totalTrailData.length / 2);
+                    console.log("centerIndexV2:", centerIndexV2);
+                    var trailCenter = foundTrailData.geometry.coordinates[centerIndex];
                     console.log("trailCenter:", trailCenter);
                     generateMap(trailCenter, trailFeature);
-
                 });
             };
             function extractTrail(data) {
                 var foundTrailData = null;
+                var totalTrailData = [];
+                var latlngFlag = true;
                 console.log("== extractTrail ==");
                 console.log("data.features", data.features);
                 console.log("gon.selected_trail =", gon.selected_trail);
@@ -36,24 +42,39 @@ $(document).on('turbolinks:load', function() {
                     console.log(trail.properties.NAME);
                     if (trail.properties.NAME == gon.selected_trail) {
                         console.log("++ Found Trail ++");
-                        foundTrailData = trail;
-                        console.log("+ foundTrailData +", foundTrailData);
-                        return false
+                        if (foundTrailData == null) {
+                            foundTrailData = trail;
+                            console.log("+ foundTrailData +", foundTrailData);
+                        };
+                        $.each(trail.geometry.coordinates, function(index, coordinates){
+                            if (coordinates.length > 2) {
+                                console.log("coordinates.length", coordinates.length);
+                                var latlngFlag = false;
+                                Array.prototype.push.apply(totalTrailData, coordinates )
+                                console.log("+= totalTrailData =+", totalTrailData);
+                            }
+                        });
+                        if (latlngFlag == true) {
+                            Array.prototype.push.apply(totalTrailData, trail.geometry.coordinates )
+                            console.log("+ totalTrailData +", totalTrailData);
+                        }
+                        latlngFlag = true;
+                        // return false
                     };
                 });
-                return foundTrailData
+                return [foundTrailData, totalTrailData]
             };
             function generateMap(trailCenter, trailFeature) {
-                var mapContainer = document.getElementById('map-container');
+                var map_container = document.getElementById('map_container');
                 latLng = { lat: trailCenter[1], lng: trailCenter[0]};
                 console.log("== latLng", latLng);
                 var zoom = 15;
-                console.log("mapContainer:", mapContainer);
-                console.log("$(mapContainer):", $(mapContainer));
-                if (mapContainer) {
-                    mapContainer.innerHTML = "";
+                console.log("map_container:", map_container);
+                console.log("$(map_container):", $(map_container));
+                if (map_container) {
+                    map_container.innerHTML = "";
                 }
-                map = new google.maps.Map(mapContainer, {
+                map = new google.maps.Map(map_container, {
                     center: latLng,
                     minZoom: 11,
                     maxZoom: 20,
@@ -88,7 +109,8 @@ $(document).on('turbolinks:load', function() {
                 map.data.addGeoJson(trailFeature);
             };
         };
+        trailAjaxQueue();
     }
 
-    trailAjaxQueue();
+    // google.maps.event.addDomListener(window, "load", trailAjaxQueue());
 }); //End of jQuery

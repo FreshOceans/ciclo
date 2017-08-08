@@ -21,7 +21,7 @@ class UsersController < ApplicationController
   # == GET /weather_underground
   def weather_underground
     puts "\n******** weather_underground ********"
-    @radar = Wunderground.animated_radar_api_response
+    # @radar = Wunderground.animated_radar_api_response
     puts "@radar.inspect #{@radar.inspect}"
   end
 

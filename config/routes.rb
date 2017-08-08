@@ -13,7 +13,6 @@ Rails.application.routes.draw do
   # == Custom Routes
   get "/landing" => "users#landing"
   get "/user_reports/:id" => "users#user_reports"
-
   get "/weather" => "users#weather_underground"
 
   # = Admin Routes
@@ -24,6 +23,8 @@ Rails.application.routes.draw do
   get "/users" => "users#index"
   get "/trails" => "trails#index"
   get "/counties" => "county#index"
+  get "/seed" => "admins#trail_database"
+
 
   # == RESTful Routes
   resources :users do

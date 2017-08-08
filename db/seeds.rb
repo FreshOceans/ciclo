@@ -30,19 +30,20 @@ County.create([
     { name:"Arlington" },
     { name:"Fairfax" },
     { name:"D.C." },
-    { name:"Montgomery"}
+    { name:"Montgomery"},
+    { name:"Alexandria"}
 ])
 
-# Trail: county_id:integer, csv_id:integer, name:string, length:float, surface:string, surface_rating:float traffic_rating:float, scenery_rating:float, overall_rating:float, created_at:timestamp updated_at:timestamp
-Trail.destroy_all
-Trail.create([
-    { csv_id:1, name:"The Mount Vernon Trail", length:18, surface:"Pavement", surface_rating:5, traffic_rating:4, scenery_rating:5, overall_rating:4.5  },
-    { csv_id:2, name:"The Great Washington Bicycle Loop Ride", length:30, surface:"Pavement", surface_rating:5, traffic_rating:5, scenery_rating:5, overall_rating:3.5  },
-    { csv_id:3, name:"Key Chain Tour", length:16, surface:"Pavement", surface_rating:3, traffic_rating:5, scenery_rating:4, overall_rating:4  },
-    { csv_id:4, name:"The Arlington Triangle", length:17, surface:"Pavement", surface_rating:5, traffic_rating:4, scenery_rating:5, overall_rating:4.75  },
-    { csv_id:5, name:"A Ride to the Falls", length:27, surface:"Unpaved", surface_rating:3, traffic_rating:1, scenery_rating:5, overall_rating:3.5  },
-    { csv_id:6, name:"Case Bridge Crossing", length:1, surface:"Pavement", surface_rating:2, traffic_rating:2, scenery_rating:2, overall_rating:2  }
-])
+# Trail: csv_id:integer, name:string, length:float, surface:string, surface_rating:float traffic_rating:float, scenery_rating:float, overall_rating:float, created_at:timestamp updated_at:timestamp
+# Trail.destroy_all
+# Trail.create([
+#     { csv_id:1, name:"The Mount Vernon Trail", length:18, surface:"Pavement", surface_rating:5, traffic_rating:4, scenery_rating:5, overall_rating:4.5  },
+#     { csv_id:2, name:"The Great Washington Bicycle Loop Ride", length:30, surface:"Pavement", surface_rating:5, traffic_rating:5, scenery_rating:5, overall_rating:3.5  },
+#     { csv_id:3, name:"Key Chain Tour", length:16, surface:"Pavement", surface_rating:3, traffic_rating:5, scenery_rating:4, overall_rating:4  },
+#     { csv_id:4, name:"The Arlington Triangle", length:17, surface:"Pavement", surface_rating:5, traffic_rating:4, scenery_rating:5, overall_rating:4.75  },
+#     { csv_id:5, name:"A Ride to the Falls", length:27, surface:"Unpaved", surface_rating:3, traffic_rating:1, scenery_rating:5, overall_rating:3.5  },
+#     { csv_id:6, name:"Case Bridge Crossing", length:1, surface:"Pavement", surface_rating:2, traffic_rating:2, scenery_rating:2, overall_rating:2  }
+# ])
 
 # CountyTrail: county_id:integer, trail_id:integer, created_at:timestamp updated_at:timestamp
 CountyTrail.destroy_all
