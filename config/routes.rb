@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get "/landing" => "users#landing"
   get "/user_reports/:id" => "users#user_reports"
   get "/weather" => "users#weather_underground"
+  get "/find_bicycle_stores" => "users#find_bicycle_stores"
 
   # = Admin Routes
   get "/admin" => "admins#home"
@@ -24,6 +25,9 @@ Rails.application.routes.draw do
   get "/trails" => "trails#index"
   get "/counties" => "county#index"
   get "/seed" => "admins#trail_database"
+
+  # == Google Bicycle Stores
+  get "/local_bicycle_stores_json" => "users#local_bicycle_stores_json"
 
 
   # == RESTful Routes

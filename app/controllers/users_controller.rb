@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   # include Wunderground
+  include Google_places
 
   # == GET /home
   def home
@@ -11,6 +12,86 @@ class UsersController < ApplicationController
     puts "*** current_user.inspect: #{current_user.inspect} ****"
     # puts "*** current_user[:id].inspect: #{current_user[:id].inspect} ****"
   end
+
+  # ==== Google Places API: Bicycle Stores ====
+  # GET /find_bicycle_stores
+  def find_bicycle_stores
+      gon.js_presence = true
+      puts "\n******* find_bicycle_stores *******"
+      puts "find_bicycle_stores_params.inspect: #{find_bicycle_stores_params.inspect}"
+      permitted_params = find_bicycle_stores_params
+      puts "== permitted_params.inspect: #{permitted_params.inspect}"
+
+      # == list of local bicycle_store via google places
+      search_bicycle_stores = find_bicycle_stores(permitted_params[:something])
+
+      puts "+++ search_bicycle_stores.inspect #{search_bicycle_stores.inspect}"
+      json_data = Google_places.places_api_response(search_bicycle_stores)
+      @place_data_array = json_data['results']
+
+      # == map data source via google maps
+      render "local_bicycle_stores"
+  end
+
+  # GET /find_local_bicycle_stores
+  def find_local_bicycle_stores
+      puts "\n******* find_local_bicycle_stores *******"
+    #   gon.js_presence = true
+
+      # == search for bicycle_stores locations within 804meters(0.5mi) of geolocation
+      location = get_lat_lon()
+      radius = "804"
+      types = "bicycle_store"
+      key = GOOGLE_PLACES_KEY
+
+      search_bicycle_stores = "location=" + location
+      search_bicycle_stores += "&radius=" + radius
+      search_bicycle_stores += "&types=" + types
+      search_bicycle_stores += "&key=" + key
+
+      puts "+=+ search_bicycle_stores.inspect #{search_bicycle_stores.inspect}+=+"
+
+      return search_bicycle_stores
+  end
+
+  # == Retrieve Geolocation of User ==
+  # GET /get_lat_lon
+  def get_lat_lon
+    puts "\n******* get_lat_lon *******"
+
+    return "#{loc[:latitude]},#{loc[:longitude]}"
+  end
+
+  # GET /local_bicycle_stores_json
+  def local_bicycle_stores_json
+    puts "\n******* local_bicycle_stores_json *******"
+    puts "params: #{params.inspect}"
+    search_bicycle_stores = find_local_bicycle_stores
+    json_data = Google_places.places_api_response(search_bicycle_stores)
+    @place_data_array = json_data['results']
+    puts "@place_data_array[0]: #{@place_data_array[0].inspect}"
+    respond_to do |format|
+      format.json {
+         render json: {:place_data_array => @place_data_array}
+      }
+    end
+  end
+
+  # GET /make_local_map
+  def make_local_map()
+      puts "\n******* make_local_map *******"
+
+      # == search for bicycle_stores locations within 804meters(0.5mi) of geolocation
+      location = get_lat_lon()
+
+      key = GOOGLE_MAPS_KEY
+      remote_url = "https://www.google.com/maps/embed/v1/place"
+      remote_url += "?key=" + key
+      remote_url += "&q=" + location
+      puts "remote_url: #{remote_url.inspect}"
+      return remote_url
+  end
+
 
   # == GET /landing
   def landing
@@ -116,5 +197,10 @@ class UsersController < ApplicationController
     def user_params
       puts "\n******** user_params ********"
     #   params.fetch(:user, {})
+    end
+
+    def find_bicycle_stores_params
+      puts "\n******** find_bicycle_stores_params ********"
+      params.permit(:bicycle_stores_name)
     end
 end
