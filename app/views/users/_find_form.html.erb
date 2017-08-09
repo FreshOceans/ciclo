@@ -3,8 +3,8 @@
     <%= form_tag('/find_bicycle_stores', method: 'get') do |form| %>
       <div class="form-div form-grp-div-md">
         <div class="input-group">
-          <%= label_tag(:bicycle_stores_name, "Store Name:", class: "form-label") %><br>
-          <%= text_field_tag(:bicycle_stores_name, nil, class: "form-input") %>
+          <%= label_tag(:geolocation, "Store Name:", class: "form-label") %><br>
+          <%= text_field_tag(:geolocation, nil, class: "form-input") %>
         </div>
       </div>
       <div class="form-div form-grp-div-md">

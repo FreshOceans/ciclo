@@ -1,6 +1,36 @@
 // $(document).ready(function() {
 $(document).on('turbolinks:load', function() {
-    if (gon.js_presence == true) {
+    if (gon.shop_presence == true) {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                var pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+            };
+            console.log("pos:", pos);
+            },
+            function() {
+                handleLocationError(true, infoWindow, map.getCenter());
+            });
+            function geolocationAjax() {
+                console.log("== geolocationAjax ==");
+                $.ajax({
+                    url: '/find_bicycle_shops',
+                    data: position.coords.latitude,
+                    method: "GET",
+                    dataType: "json",
+                }).done (function(json_data){
+                    console.log("== done ==");
+                    shopResults(json_data);
+                })
+        } else {
+           // Browser doesn't support Geolocation
+           handleLocationError(false, infoWindow, map.getCenter());
+        }
+        function shopResults(json_data) {
+            console.log("== shopResults ==");
+        };
+    } else if (gon.js_presence == true) {
         console.log("gon.js_presence:", gon.js_presence);
         if (gon.js_presence) {
             console.log("jQuery loaded/document ready");

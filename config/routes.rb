@@ -14,7 +14,10 @@ Rails.application.routes.draw do
   get "/landing" => "users#landing"
   get "/user_reports/:id" => "users#user_reports"
   get "/weather" => "users#weather_underground"
-  get "/find_bicycle_stores" => "users#find_bicycle_stores"
+
+  get "/find_bicycle_shops" => "users#find_bicycle_shops"
+  get "/find_bicycle_shops/:pos" => "users#find_bicycle_shops_ajax"
+  # get "/search_shops" => "users#search_shops"
 
   # = Admin Routes
   get "/admin" => "admins#home"
@@ -25,10 +28,6 @@ Rails.application.routes.draw do
   get "/trails" => "trails#index"
   get "/counties" => "county#index"
   get "/seed" => "admins#trail_database"
-
-  # == Google Bicycle Stores
-  get "/local_bicycle_stores_json" => "users#local_bicycle_stores_json"
-
 
   # == RESTful Routes
   resources :users do
