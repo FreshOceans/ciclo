@@ -75,26 +75,45 @@ class UsersController < ApplicationController
   #     return remote_url
   # end
 
-
-  # == GET /landing
-  def landing
-    puts "\n******** landing ********"
-    @user = User.find(current_user.id)
-  end
-
   # ===== Weather Underground API: Radar & Hourly Forecast ====
   # GET /weather_underground
   def weather_underground
     puts "\n******** weather_underground ********"
-    search_radar = wu_api_constructor
+    gon.wu_presence = true
+    search_radar = wu_radar_constructor
     puts "search_radar.inspect: #{search_radar.inspect}"
-    @wu_radar = wu_api_constructor
+    @wu_radar = wu_radar_constructor
     puts "@wu_radar.inspect #{@wu_radar.inspect}"
   end
 
-  # GET /wu_api_constructor
-  def wu_api_constructor
-      puts "\n******* wu_api_constructor *******"
+  # GET /wu_hourly_constructor
+  def wu_hourly_constructor
+      puts "\n******* wu_hourly_constructor *******"
+
+       base_search_url = "http://api.wunderground.com/api/"
+       key = WEATHER_UNDERGROUND_KEY
+       feature = "/hourly/q/"
+       location = "/DC/Washington.json"
+
+       search_hourly = base_search_url
+       search_hourly += key
+       search_hourly += feature
+       search_hourly += location
+
+       puts "+=+ search_hourly.inspect: #{search_hourly.inspect}+=+"
+
+       response = HTTParty.get(search_hourly)
+
+       respond_to do |format|
+           format.json {
+               render json: {:hourly_data => response}
+           }
+       end
+  end
+
+  # GET /wu_radar_constructor
+  def wu_radar_constructor
+      puts "\n******* wu_radar_constructor *******"
 
       base_search_url = "http://api.wunderground.com/api/"
       key = WEATHER_UNDERGROUND_KEY
@@ -113,6 +132,12 @@ class UsersController < ApplicationController
       puts "+=+ search_radar.inspect #{search_radar.inspect}+=+"
 
       return search_radar
+  end
+
+  # == GET /landing
+  def landing
+    puts "\n******** landing ********"
+    @user = User.find(current_user.id)
   end
 
   # GET /check_user
