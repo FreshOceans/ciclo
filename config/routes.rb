@@ -13,11 +13,10 @@ Rails.application.routes.draw do
   # == Custom Routes
   get "/landing" => "users#landing"
   get "/user_reports/:id" => "users#user_reports"
+  
   get "/weather" => "users#weather_underground"
 
-  get "/find_bicycle_shops" => "users#find_bicycle_shops"
-  get "/find_bicycle_shops/:pos" => "users#find_bicycle_shops_ajax"
-  # get "/search_shops" => "users#search_shops"
+  get "/find_bicycle_shops_ajax/:pos" => "users#find_bicycle_shops_ajax"
 
   # = Admin Routes
   get "/admin" => "admins#home"

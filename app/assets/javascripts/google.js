@@ -1,28 +1,38 @@
 // $(document).ready(function() {
 $(document).on('turbolinks:load', function() {
-    if (gon.shop_presence == true) {
+    $('#shops_link').click(function(event) {
+        console.log("You clicked ME");
+        event.preventDefault(); // Prevent link from following its href
+        geoLocationInitiliaze();
+    });
+    function geoLocationInitiliaze() {
+        console.log("== geoLocationInitiliaze ==");
+    // if (gon.shop_presence == true) {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
                 var pos = {
                     lat: position.coords.latitude,
                     lng: position.coords.longitude
-            };
-            console.log("pos:", pos);
+                };
+                console.log("pos:", pos);
+                console.log("pos:", pos.lat);
+                function geolocationAjax(pos) {
+                    console.log("== geolocationAjax ==");
+                    $.ajax({
+                        url: '/find_bicycle_shops_ajax',
+                        data: {pos: pos.lat},
+                        method: "GET",
+                        dataType: "json",
+                    }).done (function(json_data){
+                        console.log("== done ==");
+                        shopResults(json_data);
+                    })
+                };
+                geolocationAjax(pos);
             },
             function() {
                 handleLocationError(true, infoWindow, map.getCenter());
             });
-            function geolocationAjax() {
-                console.log("== geolocationAjax ==");
-                $.ajax({
-                    url: '/find_bicycle_shops',
-                    data: position.coords.latitude,
-                    method: "GET",
-                    dataType: "json",
-                }).done (function(json_data){
-                    console.log("== done ==");
-                    shopResults(json_data);
-                })
         } else {
            // Browser doesn't support Geolocation
            handleLocationError(false, infoWindow, map.getCenter());
@@ -30,7 +40,8 @@ $(document).on('turbolinks:load', function() {
         function shopResults(json_data) {
             console.log("== shopResults ==");
         };
-    } else if (gon.js_presence == true) {
+    };
+    if (gon.js_presence == true) {
         console.log("gon.js_presence:", gon.js_presence);
         if (gon.js_presence) {
             console.log("jQuery loaded/document ready");
@@ -144,3 +155,9 @@ $(document).on('turbolinks:load', function() {
 
     // google.maps.event.addDomListener(window, "load", trailAjaxQueue());
 }); //End of jQuery
+
+
+// {
+//     lat: position.coords.latitude,
+//     lng: position.coords.longitude
+// }

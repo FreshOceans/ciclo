@@ -14,32 +14,27 @@ class UsersController < ApplicationController
   end
 
   # ==== Google Places API: Bicycle Shops ====
-  # GET /search_shops
-  # def search_shops
-  #   puts "\n******* search_shops *******"
-  #   gon.shop_presence = true
-  # end
-
-  # GET /find_bicycle_shops
-  def find_bicycle_shops
-      gon.shop_presence = true
-      puts "\n******* find_bicycle_shops *******"
-      puts "find_bicycle_shops_params.inspect: #{find_bicycle_shops_params.inspect}"
-      permitted_params = find_bicycle_shops_params
-      puts "== permitted_params.inspect: #{permitted_params.inspect}"
-      geolocation = "38.8048,-77.0469"
-      search_bicycle_shops = find_local_bicycle_shops(geolocation)
+  # GET /find_bicycle_shops_ajax
+  def find_bicycle_shops_ajax
+    gon.shop_presence = true
+    puts "\n******* find_bicycle_shops_ajax *******"
+    # puts "find_bicycle_shops_ajax_params.inspect: #{find_bicycle_shops_ajax_params.inspect}"
+    puts "params.inspect #{params.inspect}"
+    permitted_params = find_bicycle_shops_ajax_params
+    # puts "== permitted_params.inspect: #{permitted_params.inspect}"
+    geolocation = "38.8048,-77.0469"
+    search_bicycle_shops = find_local_bicycle_shops(geolocation)
     #   search_bicycle_shops = find_local_bicycle_shops(permitted_params[:geolocation])
-      json_data = Google_places.places_api_response(search_bicycle_shops)
-      @place_data_array = json_data['results']
+    json_data = Google_places.places_api_response(search_bicycle_shops)
+    @place_data_array = json_data['results']
 
-      # == map data source via google maps
-    #   render "local_bicycle_shops"
-      respond_to do |format|
+    # == map data source via google maps
+    # render "local_bicycle_shops"
+    respond_to do |format|
         format.json {
-           render json: {:place_data_array => @place_data_array}
+            render json: {:place_data_array => @place_data_array}
         }
-      end
+    end
   end
 
   # GET /find_local_bicycle_shops
@@ -65,16 +60,6 @@ class UsersController < ApplicationController
       return search_bicycle_shops
   end
 
-  # == Retrieve Geolocation of User ==
-  # GET /get_lat_lon
-  # def get_lat_lon
-  #   puts "\n******* get_lat_lon *******"
-  #
-  #   loc = { latitude: 38.904706, longitude: -77.034715}
-  #
-  #   return "#{loc[:latitude]}, #{loc[:longitude]}"
-  # end
-
   # GET /make_local_map
   # def make_local_map
   #     puts "\n******* make_local_map *******"
@@ -97,11 +82,37 @@ class UsersController < ApplicationController
     @user = User.find(current_user.id)
   end
 
-  # == GET /weather_underground
+  # ===== Weather Underground API: Radar & Hourly Forecast ====
+  # GET /weather_underground
   def weather_underground
     puts "\n******** weather_underground ********"
-    # @radar = Wunderground.animated_radar_api_response
-    puts "@radar.inspect #{@radar.inspect}"
+    search_radar = wu_api_constructor
+    puts "search_radar.inspect: #{search_radar.inspect}"
+    @wu_radar = wu_api_constructor
+    puts "@wu_radar.inspect #{@wu_radar.inspect}"
+  end
+
+  # GET /wu_api_constructor
+  def wu_api_constructor
+      puts "\n******* wu_api_constructor *******"
+
+      base_search_url = "http://api.wunderground.com/api/"
+      key = WEATHER_UNDERGROUND_KEY
+      feature = "/animatedradar/q/"
+      location = "/DC/Washington"
+      wu_format = ".gif?"
+      params = "newmaps=1&timelabel=1&timelabel.y=10&num=5&delay=50"
+
+      search_radar = base_search_url
+      search_radar += key
+      search_radar += feature
+      search_radar += location
+      search_radar += wu_format
+      search_radar += params
+
+      puts "+=+ search_radar.inspect #{search_radar.inspect}+=+"
+
+      return search_radar
   end
 
   # GET /check_user
@@ -197,8 +208,8 @@ class UsersController < ApplicationController
     #   params.fetch(:user, {})
     end
 
-    def find_bicycle_shops_params
-      puts "\n******** find_bicycle_shops_params ********"
+    def find_bicycle_shops_ajax_params
+      puts "\n******** find_bicycle_shops_ajax_params ********"
       params.permit(:geolocation)
     end
 end
