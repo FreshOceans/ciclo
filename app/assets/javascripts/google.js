@@ -18,9 +18,10 @@ $(document).on('turbolinks:load', function() {
                 console.log("pos:", pos.lat);
                 function geolocationAjax(pos) {
                     console.log("== geolocationAjax ==");
+                    var url = '/find_bicycle_shops_ajax?lat=' + pos.lat + '&lng=' + pos.lng
+                    console.log("url:", url);
                     $.ajax({
-                        url: '/find_bicycle_shops_ajax',
-                        data: {pos: pos.lat},
+                        url: url,
                         method: "GET",
                         dataType: "json",
                     }).done (function(json_data){
@@ -155,9 +156,3 @@ $(document).on('turbolinks:load', function() {
 
     // google.maps.event.addDomListener(window, "load", trailAjaxQueue());
 }); //End of jQuery
-
-
-// {
-//     lat: position.coords.latitude,
-//     lng: position.coords.longitude
-// }

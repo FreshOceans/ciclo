@@ -22,11 +22,13 @@ class UsersController < ApplicationController
     puts "params.inspect #{params.inspect}"
     permitted_params = find_bicycle_shops_ajax_params
     # puts "== permitted_params.inspect: #{permitted_params.inspect}"
-    geolocation = "38.8048,-77.0469"
+    geolocation = permitted_params[:lat] +  "," + permitted_params[:lng]
+    puts "geolocation: #{geolocation}"
     search_bicycle_shops = find_local_bicycle_shops(geolocation)
     #   search_bicycle_shops = find_local_bicycle_shops(permitted_params[:geolocation])
     json_data = Google_places.places_api_response(search_bicycle_shops)
     @place_data_array = json_data['results']
+    puts "@@place_data_array, #{@place_data_array.inspect}"
 
     # == map data source via google maps
     # render "local_bicycle_shops"
@@ -235,6 +237,6 @@ class UsersController < ApplicationController
 
     def find_bicycle_shops_ajax_params
       puts "\n******** find_bicycle_shops_ajax_params ********"
-      params.permit(:geolocation)
+      params.permit(:lat, :lng)
     end
 end
