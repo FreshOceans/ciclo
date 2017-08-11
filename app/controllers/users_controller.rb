@@ -31,12 +31,12 @@ class UsersController < ApplicationController
     puts "@@place_data_array, #{@place_data_array.inspect}"
 
     # == map data source via google maps
-    # render "local_bicycle_shops"
-    respond_to do |format|
-        format.json {
-            render json: {:place_data_array => @place_data_array}
-        }
-    end
+    render "local_bicycle_shops_ajax"
+    # respond_to do |format|
+    #     format.json {
+    #         render json: {:place_data_array => @place_data_array}
+    #     }
+    # end
   end
 
   # GET /find_local_bicycle_shops

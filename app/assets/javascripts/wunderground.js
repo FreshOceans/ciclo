@@ -43,6 +43,6 @@ $(document).on('turbolinks:load', function() {
                 $("#hourly_forecast").append(html_str);
             };
         };
-    }
-    wundergroundAjax();
+        wundergroundAjax();
+    };
 }); //End of jQuery

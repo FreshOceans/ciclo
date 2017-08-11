@@ -16,20 +16,25 @@ $(document).on('turbolinks:load', function() {
                 };
                 console.log("pos:", pos);
                 console.log("pos:", pos.lat);
-                function geolocationAjax(pos) {
-                    console.log("== geolocationAjax ==");
-                    var url = '/find_bicycle_shops_ajax?lat=' + pos.lat + '&lng=' + pos.lng
-                    console.log("url:", url);
-                    $.ajax({
-                        url: url,
-                        method: "GET",
-                        dataType: "json",
-                    }).done (function(json_data){
-                        console.log("== done ==");
-                        shopResults(json_data);
-                    })
+                var url = '/find_bicycle_shops_ajax?lat=' + pos.lat + '&lng=' + pos.lng
+                console.log("url:", url);
+                function geolocationLink(url) {
+                    console.log("== geolocationLink ==");
+                    window.location.href = url;
                 };
-                geolocationAjax(pos);
+
+                // function geolocationAjax(pos) {
+                //     console.log("== geolocationAjax ==");
+                //     $.ajax({
+                //         url: url,
+                //         method: "GET",
+                //         dataType: "json",
+                //     }).done (function(json_data){
+                //         console.log("== done ==");
+                //         shopResults(json_data);
+                //     })
+                // };
+                geolocationLink(url);
             },
             function() {
                 handleLocationError(true, infoWindow, map.getCenter());
@@ -38,9 +43,9 @@ $(document).on('turbolinks:load', function() {
            // Browser doesn't support Geolocation
            handleLocationError(false, infoWindow, map.getCenter());
         }
-        function shopResults(json_data) {
-            console.log("== shopResults ==");
-        };
+        // function shopResults(json_data) {
+        //     console.log("== shopResults ==");
+        // };
     };
     if (gon.js_presence == true) {
         console.log("gon.js_presence:", gon.js_presence);
