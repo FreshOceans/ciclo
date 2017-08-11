@@ -1,12 +1,14 @@
 <h1 class="header">Local Bicycle Stores</h1>
 
-<div id="shops_map"></div>
+<div id="shops_map">
+    
+</div>
 <% @place_data_array.each do |place| %>
     <div class="map-box">
         <div class="map-info">
             <p class="place-name"><%= place["name"] %></p>
             <span><%= place["vicinity"] %></span>
-            <span><%= place["opening_hours"]%></span>
+            <span><%#= place["opening_hours"]%></span>
             <% if (place["rating"] != nil )%>
                 <span> Google Rating: <%= place["rating"] %></span>
             <% end %>

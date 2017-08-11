@@ -10,7 +10,6 @@ class UsersController < ApplicationController
     puts "*** current_user.inspect: #{current_user.inspect} ***"
     @users = User.all
     puts "*** current_user.inspect: #{current_user.inspect} ****"
-    # puts "*** current_user[:id].inspect: #{current_user[:id].inspect} ****"
   end
 
   # ==== Google Places API: Bicycle Shops ====
@@ -25,18 +24,12 @@ class UsersController < ApplicationController
     geolocation = permitted_params[:lat] +  "," + permitted_params[:lng]
     puts "geolocation: #{geolocation}"
     search_bicycle_shops = find_local_bicycle_shops(geolocation)
-    #   search_bicycle_shops = find_local_bicycle_shops(permitted_params[:geolocation])
     json_data = Google_places.places_api_response(search_bicycle_shops)
     @place_data_array = json_data['results']
     puts "@@place_data_array, #{@place_data_array.inspect}"
 
     # == map data source via google maps
     render "local_bicycle_shops_ajax"
-    # respond_to do |format|
-    #     format.json {
-    #         render json: {:place_data_array => @place_data_array}
-    #     }
-    # end
   end
 
   # GET /find_local_bicycle_shops
@@ -63,19 +56,19 @@ class UsersController < ApplicationController
   end
 
   # GET /make_local_map
-  # def make_local_map
-  #     puts "\n******* make_local_map *******"
-  #
-  #     # == search for bicycle_shops locations within 804meters(0.5mi) of geolocation
-  #     location = get_lat_lon()
-  #
-  #     key = GOOGLE_MAPS_KEY
-  #     remote_url = "https://www.google.com/maps/embed/v1/place"
-  #     remote_url += "?key=" + key
-  #     remote_url += "&q=" + location
-  #     puts "remote_url: #{remote_url.inspect}"
-  #     return remote_url
-  # end
+  def make_local_map
+      puts "\n******* make_local_map *******"
+
+      # == search for bicycle_shops locations within 804meters(0.5mi) of geolocation
+      location = get_lat_lon()
+
+      key = GOOGLE_MAPS_KEY
+      remote_url = "https://www.google.com/maps/embed/v1/place"
+      remote_url += "?key=" + key
+      remote_url += "&q=" + location
+      puts "remote_url: #{remote_url.inspect}"
+      return remote_url
+  end
 
   # ===== Weather Underground API: Radar & Hourly Forecast ====
   # GET /weather_underground
