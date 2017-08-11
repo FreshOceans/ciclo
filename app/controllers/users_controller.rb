@@ -10,12 +10,13 @@ class UsersController < ApplicationController
     puts "*** current_user.inspect: #{current_user.inspect} ***"
     @users = User.all
     puts "*** current_user.inspect: #{current_user.inspect} ****"
+    # puts "*** current_user[:id].inspect: #{current_user[:id].inspect} ****"
   end
 
   # ==== Google Places API: Bicycle Shops ====
   # GET /find_bicycle_shops_ajax
   def find_bicycle_shops_ajax
-    gon.shop_presence = true
+    # gon.shop_presence = true
     puts "\n******* find_bicycle_shops_ajax *******"
     # puts "find_bicycle_shops_ajax_params.inspect: #{find_bicycle_shops_ajax_params.inspect}"
     puts "params.inspect #{params.inspect}"
@@ -23,13 +24,26 @@ class UsersController < ApplicationController
     # puts "== permitted_params.inspect: #{permitted_params.inspect}"
     geolocation = permitted_params[:lat] +  "," + permitted_params[:lng]
     puts "geolocation: #{geolocation}"
+
+    permitted_lat = permitted_params[:lat].to_f
+    permitted_lng = permitted_params[:lng].to_f
+    @position_lat = permitted_lat
+    puts "@position_lat: #{@position_lat}"
+    @position_lng = permitted_lng
+    puts "@position_lng: #{@position_lng}"
+
     search_bicycle_shops = find_local_bicycle_shops(geolocation)
     json_data = Google_places.places_api_response(search_bicycle_shops)
     @place_data_array = json_data['results']
     puts "@@place_data_array, #{@place_data_array.inspect}"
 
     # == map data source via google maps
-    render "local_bicycle_shops_ajax"
+    # render "local_bicycle_shops_ajax"
+    respond_to do |format|
+        format.json {
+            render json: {:place_data_array => @place_data_array, :permitted_lat => @position_lat, :permitted_lng => @position_lng }
+        }
+    end
   end
 
   # GET /find_local_bicycle_shops
@@ -41,7 +55,7 @@ class UsersController < ApplicationController
       puts "||| location: #{location} |||"
       radius = "804"
       types = "bicycle_shop"
-      name = "bike_repair"
+      name = "bike"
       key = GOOGLE_PLACES_KEY
 
       search_bicycle_shops = "location=" + location

@@ -7,7 +7,8 @@
         <%= link_to 'Home', landing_path, class: "nav-item" %>
         <%= link_to 'Weather', weather_path, class: "nav-item" %>
         <%= link_to 'Trails', trails_path, class: "nav-item" %>
-        <%= link_to "Shops", "#", {id: "shops_link", class:"nav-item"} %>
+        <%#= link_to "Shops", "#", {id: "shops_link", class:"nav-item"} %>
+        <!-- <p id="shops_link" class="nav-item"> Shops </p> -->
         <%= link_to 'Profile', user_path(current_user.id), class: "nav-item" %>
         <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: "nav-item" %>
         <%= current_user.username %>
