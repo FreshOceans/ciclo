@@ -5,7 +5,23 @@ class TrailsController < ApplicationController
   # GET /trails.json
   def index
     puts "\n******** trail_index ********"
-    @trails = Trail.pluck(:name).uniq
+    # @trails = Trail.all
+    # @trails = Trail.pluck(:id, :name).uniq
+    # @trails = Trail.select(:name).distinct
+    all_trails = Trail.all
+    unique_trails = []
+    unique_trails_id = []
+    
+    all_trails.each do |trail|
+        unique_trails << trail.name unless unique_trails.include?(trail.name)
+        unique_trails_id << trail.id unless unique_trails.include?(trail.name)
+    end
+    puts "unique_trails, #{unique_trails.inspect}"
+    puts "unique_trails, #{unique_trails.length}"
+    puts "unique_trails_id, #{unique_trails_id.inspect}"
+    puts "unique_trails_id, #{unique_trails_id.length}"
+    # send both arrays down, loop thorugh one with index (trail.name, index) -> use index match
+    # puts "unique_trails.inspect, #{unique_trails.inspect}"
     # puts "@trail.inspect, #{@trails.inspect}"
   end
 
