@@ -134,27 +134,35 @@ $(document).on('turbolinks:load', function() {
                      var foundTrail = extractTrail(dataParsed);
                      foundTrailData = foundTrail[0];
                      totalTrailData = foundTrail[1];
+                     collectionFeatures = foundTrail[2];
                      console.log("foundTrailData:", foundTrailData);
                      console.log("totalTrailData:", totalTrailData);
+                     mergedGeoData = {
+                         "type": "FeatureCollection",
+                         "features": collectionFeatures
+                     };
+                     console.log("mergedGeoData:", mergedGeoData);
                      foundTrailData.geometry = {};
                      foundTrailData.geometry.type = "LineString";
                      foundTrailData.geometry.coordinates = totalTrailData;
                      console.log("foundTrailData:", foundTrailData);
-                     var trailFeature = {"type":"FeatureCollection","features":[foundTrailData]};
-                     console.log("trailFeature:", trailFeature);
+                    //  var trailFeature = collectionFeatures;
+                    //  console.log("trailFeature:", trailFeature);
                      var centerIndex = Math.floor(foundTrailData.geometry.coordinates.length / 2);
                      console.log("centerIndex:", centerIndex);
                      // var centerIndexV2 = Math.floor(totalTrailData.length / 2);
                      // console.log("centerIndexV2:", centerIndexV2);
                      var trailCenter = foundTrailData.geometry.coordinates[centerIndex];
                      console.log("trailCenter:", trailCenter);
-                     generateMap(trailCenter, trailFeature);
+                     generateMap(trailCenter, mergedGeoData);
                  });
              };
              function extractTrail(data) {
 
                  // == Initialize Paring Variables
                  var foundTrailData = null;
+                 var collectionFeatures = [];
+                 console.log("collectionFeatures BEFORE:", collectionFeatures);
                  var totalTrailData = [];
                  var latlngFlag = true;
 
@@ -169,6 +177,12 @@ $(document).on('turbolinks:load', function() {
                  console.log("\n ======= extractTrailData =======");
                  console.log("gon.selected_trail:", gon.selected_trail);
 
+                 // == Loop through data.features object then add to collectionFeatures array
+                //  for (var i = 0; i < data.features.length; i++) {
+                //      // var allTrails = trail[i];
+                //      collectionFeatures.push(data.features[i]);
+                //  };
+
                  // == Loop through all Trails
                  $.each(data.features, function(index, trail) {
                      console.log("name:", index, trail.properties.NAME);
@@ -176,10 +190,11 @@ $(document).on('turbolinks:load', function() {
                      // == Accumulate Found Trail Coordinates (parse segment data)
                      if (trail.properties.NAME == gon.selected_trail) {
                          console.log("+++++++ Found Trail +++++++");
-                         totalSegmentPairs = 0
+                         totalSegmentPairs = 0;
                          totalTrailCoords = totalTrailCoords + trail.geometry.coordinates.length;
                          console.log("  trailCoords:", trail.geometry.coordinates.length);
                          console.log("  totalTrailPairs BEFORE:", totalTrailPairs);
+                         collectionFeatures.push(trail);
 
                          // Initialize New Trail geojson object
                          if (foundTrailData == null) {
@@ -210,16 +225,18 @@ $(document).on('turbolinks:load', function() {
                          latlngFlag = true;
                      };
                  });
+                 console.log("collectionFeatures AFTER:", collectionFeatures);
+
                  console.log("totalTrailCoords:", totalTrailCoords);
                  console.log("totalSegmentCoords:", totalSegmentCoords);
                  console.log("segmentCount:", segmentCount);
                  console.log("totalTrailPairs:", totalTrailPairs);
                  console.log("totalTrailData.length:", totalTrailData.length);
-                 return [foundTrailData, totalTrailData]
+                 return [foundTrailData, totalTrailData, collectionFeatures]
              };
 
              // == Add Trail Feature to Map based of Trail Center
-             function generateMap(trailCenter, trailFeature) {
+             function generateMap(trailCenter, mergedGeoData) {
                  var map_container = document.getElementById('map_container');
                  latLng = { lat: trailCenter[1], lng: trailCenter[0]};
                  console.log("== latLng", latLng);
@@ -261,7 +278,7 @@ $(document).on('turbolinks:load', function() {
                      strokeOpacity: 0.65
                  });
                  // map.data.loadGeoJson(foundTrail);
-                 map.data.addGeoJson(trailFeature);
+                 map.data.addGeoJson(mergedGeoData);
              };
          };
          trailAjaxQueue();
