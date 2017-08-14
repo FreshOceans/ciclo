@@ -6,6 +6,7 @@ class TrailsController < ApplicationController
   def index
     puts "\n******** trail_index ********"
     @trails = Trail.all
+    # @trail = Trail()find by unique name
   end
 
   # GET /trails/1
