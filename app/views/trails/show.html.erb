@@ -7,7 +7,7 @@
         <p id="trail-name"><%= @trail.name %></p>
       </div>
       <div id="trail-length-container">
-        <p id="trail-length"><%= @trail.length %>mi</p>
+        <p id="trail-length"><%= @trail.length.round(3) %>mi</p>
       </div>
       <div id="trail-surface-container">
         <p id="trail-surface"><%= @trail.surface %></p>

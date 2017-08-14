@@ -5,8 +5,8 @@ class TrailsController < ApplicationController
   # GET /trails.json
   def index
     puts "\n******** trail_index ********"
-    @trails = Trail.all
-    # @trail = Trail()find by unique name
+    @trails = Trail.pluck(:name).uniq
+    # puts "@trail.inspect, #{@trails.inspect}"
   end
 
   # GET /trails/1
