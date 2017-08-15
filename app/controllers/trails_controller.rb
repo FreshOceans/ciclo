@@ -47,6 +47,8 @@ class TrailsController < ApplicationController
         @scenery_avg = 0
         @overall_rating_avg = 0
     end
+    session[:trail_id] = @trail.id
+    @photo = Photo.where(trail_id: ).first
 
     puts "***== @trail.inspect, #{@trail.inspect} ==***"
     puts "@surface_avg: #{@surface_avg}"
@@ -129,6 +131,6 @@ class TrailsController < ApplicationController
     def trail_params
       puts "\n******** trail_params ********"
     #   params.fetch(:trail, {})
-      params.require(:trail).permit(:county_id, :csv_id, :name, :length, :surface, :surface_rating, :traffic_rating, :scenery_rating, :overall_rating)
+      params.require(:trail).permit(:county_id, :csv_id, :name, :length, :surface, :surface_rating, :traffic_rating, :scenery_rating, :overall_rating, photo_attributes:[:image])
     end
 end

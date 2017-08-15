@@ -18,10 +18,9 @@
         <% end %>
       </div>
 
-      <!-- Average Bar Rating display - functions 100% -->
-        <!-- <div id="trail-rating-container">
-          <p id="trail-rating"><%= @rating_avg %></p>
-        </div> -->
+      <!-- <div id="trail-rating-container">
+          <p id="trail-rating"><%= @overall_rating_avg %></p>
+      </div> -->
 
       <div id="trail-rating-container">
         <div id="trail-icon-wrapper">
@@ -52,6 +51,8 @@
     <div id="map_canvas">
     </div>
   </div>
+  
+  <span class="item-label">Profile Photo:</span> <span class="item"><%= link_to 'New Photo', new_photo_path, class: "nav-item" %></span>
 
   <div id="ratings-area">
     <% if @reports.length > 0 %>
