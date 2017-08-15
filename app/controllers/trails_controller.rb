@@ -48,7 +48,12 @@ class TrailsController < ApplicationController
         @overall_rating_avg = 0
     end
     session[:trail_id] = @trail.id
-    @photo = Photo.where(trail_id: ).first
+    @photo = Photo.new
+    # @photo = Photo.where(user_id: current_user.id).first
+    # @photo = Photo.where(trail_id: session[:trail_id]).first
+    @photos = Photo.where(trail_id: session[:trail_id])
+
+    puts "@photos: #{@photos}"
 
     puts "***== @trail.inspect, #{@trail.inspect} ==***"
     puts "@surface_avg: #{@surface_avg}"
@@ -57,6 +62,35 @@ class TrailsController < ApplicationController
     puts "@overall_rating_avg: #{@overall_rating_avg}"
     puts "*** session[:trail_id].inspect: #{session[:trail_id].inspect} ***"
     puts "***== @user.inspect, #{@user.inspect} ==***"
+  end
+
+  # POST /photos
+  # POST /photos.json
+  def create_trail_photo
+    puts "\n******** photos_create ********"
+    puts "photo_params: #{photo_params.inspect}"
+
+    new_params = photo_params
+    new_params[:user_id] = current_user.id
+    new_params[:trail_id] = session[:trail_id]
+    puts "new_params[:user_id]: #{new_params[:user_id]}"
+    puts "new_params[:trail_id]: #{new_params[:trail_id]}"
+    puts "new_params.inspect: #{new_params.inspect}"
+
+    @photo = Photo.new(new_params)
+    puts "@photo.inspect: #{@photo.inspect}"
+
+    respond_to do |format|
+      if @photo.save
+        puts "+++ Photo Success +++"
+        format.html { redirect_to trail_path(session[:trail_id]), notice: 'Photo was successfully created.' }
+        format.json { render :show, status: :created, location: @photo }
+      else
+        puts "+++ Photo Failure +++"
+        format.html { render :new, notice: 'Photo was not added.' }
+        format.json { render json: @photo.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # GET /trails/new
@@ -131,6 +165,12 @@ class TrailsController < ApplicationController
     def trail_params
       puts "\n******** trail_params ********"
     #   params.fetch(:trail, {})
-      params.require(:trail).permit(:county_id, :csv_id, :name, :length, :surface, :surface_rating, :traffic_rating, :scenery_rating, :overall_rating, photo_attributes:[:image])
+      params.require(:trail).permit(:county_id, :csv_id, :name, :length, :surface, :surface_rating, :traffic_rating, :scenery_rating, :overall_rating )
     end
+
+    def photo_params
+      puts "\n******** photos_params ********"
+      params.require(:photo).permit(:content_type, :caption, :image)
+    end
+
 end

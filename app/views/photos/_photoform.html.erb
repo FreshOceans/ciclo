@@ -1,0 +1,25 @@
+<%#= form_for(@photo) do |form| %>
+<%= form_for @photo, :url => url_for(:controller => 'trails', :action => 'create_trail_photo') do |f| %>
+    <!-- ======= Photo Properties ======= -->
+    <div class="data">
+        <div class="data-label"><%= label(:caption, "Caption") %></div>
+        <div class="data-value"><%= f.text_field :caption, autofocus: true %></div>
+    </div>
+    <div class="data">
+        <div class="data-label"><%= f.label(:content_type, "Image Type") %></div>
+        <div class="data-value">
+            <%= f.select(:content_type, options_for_select(
+                [['image/jpeg', 1], ['image/png', 2], ['image/gif', 3]], 1)
+            ) %></div>
+    </div>
+    <div class="data">
+        <div class="data-label"><%= f.label :image %></div>
+        <div class="data-value"><%= f.file_field :image, autofocus: true, class:'file-field', id:'photo-file' %></div>
+    </div>
+    <!-- ======= Submit ======= -->
+    <div class="data">
+        <div class="data-value">
+            <%= f.submit value="Save Photo" %>
+        </div>
+    </div>
+<% end %>

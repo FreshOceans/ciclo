@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get "/weather" => "users#weather_underground"
   get "/find_bicycle_shops_ajax" => "users#find_bicycle_shops_ajax"
   get "/wu_url" => "users#wu_hourly_constructor"
+  post "/create_trail_photo" => "trails#create_trail_photo"
 
   # = Admin Routes
   get "/admin" => "admins#home"
