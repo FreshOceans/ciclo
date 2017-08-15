@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_many :photos
   has_many :reports
+  has_one :log
 
   # validates :username, :uniqueness => true, :presence => { :message => "This username already exists." }
 end

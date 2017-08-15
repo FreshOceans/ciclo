@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170808140624) do
+ActiveRecord::Schema.define(version: 20170815143807) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,18 @@ ActiveRecord::Schema.define(version: 20170808140624) do
     t.datetime "updated_at", null: false
     t.index ["county_id"], name: "index_county_trails_on_county_id"
     t.index ["trail_id"], name: "index_county_trails_on_trail_id"
+  end
+
+  create_table "logs", force: :cascade do |t|
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "daily"
+    t.boolean "monthly"
+    t.boolean "halfyear"
+    t.boolean "annual"
+    t.string "comment"
+    t.index ["user_id"], name: "index_logs_on_user_id"
   end
 
   create_table "photos", force: :cascade do |t|
@@ -140,6 +152,7 @@ ActiveRecord::Schema.define(version: 20170808140624) do
 
   add_foreign_key "county_trails", "counties"
   add_foreign_key "county_trails", "trails"
+  add_foreign_key "logs", "users"
   add_foreign_key "photos", "trails"
   add_foreign_key "photos", "users"
   add_foreign_key "reports", "users"
