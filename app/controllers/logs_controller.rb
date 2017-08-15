@@ -80,6 +80,6 @@ class LogsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def log_params
       puts "\n******** log_params ********"
-      params.fetch(:log, {})
+      params.require(:log).permit(:user_id, :daily, :monthly, :halfyear, :annual, :comment)
     end
 end

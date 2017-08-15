@@ -1,30 +1,30 @@
 $(document).on('turbolinks:load', function() {
     if (gon.wu_presence == true) {
-        console.log("gon.wu_presence:", gon.wu_presence);
+        // console.log("gon.wu_presence:", gon.wu_presence);
         if (gon.wu_presence) {
-            console.log("jQuery loaded/document ready");
+            // console.log("jQuery loaded/document ready");
 
             function wundergroundAjax() {
-                console.log("== wundergroundAjax ==");
+                // console.log("== wundergroundAjax ==");
                 var wu_url = "/wu_url";
-                console.log("wu_url:", wu_url);
+                // console.log("wu_url:", wu_url);
                 $.ajax({
                     url: wu_url,
                     method: "GET",
                     dataType: "json",
                 }).done (function(json_data){
-                    console.log("== done ==");
-                    console.log("json_data:", json_data);
+                    // console.log("== done ==");
+                    // console.log("json_data:", json_data);
                     displayResults(json_data);
                 });
             };
             function displayResults(json_data) {
-                console.log("== displayResults ==");
+                // console.log("== displayResults ==");
                 var hourly = json_data.hourly_data;
                 html_str = "";
                 counter = 0;
                 $.each(hourly.hourly_forecast, function(index, hour) {
-                    console.log(hour.FCTTIME.civil);
+                    // console.log("hour.FCTTIME.civil", hour.FCTTIME.civil);
                     counter++;
                     time = hour.FCTTIME.civil;
                     temp = hour.temp.english;

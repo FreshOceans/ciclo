@@ -1,17 +1,17 @@
 <h1>Log Show Page</h1>
 
 <% if (@log.daily != false)%>
-    Daily Check: <%= @log.daily %> <br>
+    Daily Check: <%= humanize_boolean(@log.daily) %> <br>
 <% end %>
 <% if (@log.monthly != false)%>
-    Monthly: <%= @log.monthly %> <br>
+    Monthly: <%= humanize_boolean(@log.monthly) %> <br>
 <% end %>
 <% if (@log.halfyear != false)%>
-    Half-year: <%= @log.halfyear %> <br>
+    Half-year: <%= humanize_boolean(@log.halfyear) %> <br>
 <% end %>
 <% if (@log.annual != false)%>
-    Annual: <%= @log.annual %> <br>
+    Annual: <%= humanize_boolean(@log.annual)%> <br>
 <% end %>
 <% if (@log.comment != nil)%>
-    comment: <%= @log.comment %> <br>
+    comment: <%= humanize_boolean(@log.comment) %> <br>
 <% end %>

@@ -2,13 +2,12 @@
 
 <%= link_to 'New Log', new_user_log_path %> <br>
 
-  <% @logs.each do |log| %>
-      <% puts "log.created_at.converted.inspect #{log.created_at.localtime.strftime("On %b %d, %Y at %I:%M%p").inspect}"%>
-      <% puts "log.id.inspect #{log.id.inspect}"%>
-      <% if (current_user.id == log[:user_id] ) %>
-      <!-- Fix link_to as date of log -->
-          <%= link_to 'Log', user_log_path(current_user.id, log.id) %> <%= log.created_at.localtime.strftime("On %b %d, %Y at %I:%M%p") %> <br>
-          <%= link_to 'Delete', user_log_path(current_user.id, log.id), method: :delete, data: { confirm: 'Are you sure?' } %>
-      <% end %>
-
+<% @logs.each do |log| %>
+  <% puts "log.created_at.converted.inspect #{log.created_at.localtime.strftime("On %b %d, %Y at %I:%M%p").inspect}"%>
+  <% puts "log.id.inspect #{log.id.inspect}"%>
+  <% if (current_user.id == log[:user_id] ) %>
+  <% @log_date = log.created_at.localtime.strftime("On %b %d, %Y at %I:%M%p") %>
+      <%= link_to @log_date, user_log_path(current_user.id, log.id) %>
+      <%= link_to 'Delete', user_log_path(current_user.id, log.id), method: :delete, data: { confirm: 'Are you sure?' } %>
   <% end %>
+<% end %>
