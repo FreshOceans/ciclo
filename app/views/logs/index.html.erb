@@ -1,25 +1,14 @@
-<p id="notice"><%= notice %></p>
+<h1>Maintenance Logs</h1>
 
-<h1>Logs</h1>
+<%= link_to 'New Log', new_user_log_path %> <br>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <% @logs.each do |log| %>
+      <% puts "log.created_at.converted.inspect #{log.created_at.localtime.strftime("On %b %d, %Y at %I:%M%p").inspect}"%>
+      <% puts "log.id.inspect #{log.id.inspect}"%>
+      <% if (current_user.id == log[:user_id] ) %>
+      <!-- Fix link_to as date of log -->
+          <%= link_to 'Log', user_log_path(current_user.id, log.id) %> <%= log.created_at.localtime.strftime("On %b %d, %Y at %I:%M%p") %> <br>
+          <%= link_to 'Delete', user_log_path(current_user.id, log.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+      <% end %>
 
-  <tbody>
-    <% @logs.each do |log| %>
-      <tr>
-        <td><%= link_to 'Show', log %></td>
-        <td><%= link_to 'Edit', edit_log_path(log) %></td>
-        <td><%= link_to 'Destroy', log, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Log', new_log_path %>
+  <% end %>

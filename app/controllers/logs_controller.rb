@@ -6,12 +6,17 @@ class LogsController < ApplicationController
   def index
     puts "\n******** log_index ********"
     @logs = Log.all
+    puts "*** @logs.inspect #{@logs.inspect}"
+    @user = User.find(current_user.id)
+    puts "*** @user.inspect #{@user.inspect}"
   end
 
   # GET /logs/1
   # GET /logs/1.json
   def show
     puts "\n******** log_show ********"
+    @user = User.find(current_user.id)
+    puts "*** @user.inspect #{@user.inspect}"
   end
 
   # GET /logs/new

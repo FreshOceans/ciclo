@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   get "/find_bicycle_shops_ajax" => "users#find_bicycle_shops_ajax"
   get "/wu_url" => "users#wu_hourly_constructor"
 
+  # get "/logs_index" => "logs#index"
+
   # = Admin Routes
   get "/admin" => "admins#home"
   get "/admin_landing" => "admins#admin_landing"
@@ -30,10 +32,12 @@ Rails.application.routes.draw do
   # == RESTful Routes
   resources :users do
      resources :reports
+     resources :logs
   end
   # resources :admins
   resources :trails
   resources :counties
   resources :photos
   resources :tags
+
 end

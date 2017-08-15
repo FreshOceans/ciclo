@@ -1,4 +1,17 @@
-<p id="notice"><%= notice %></p>
+<h1>Log Show Page</h1>
 
-<%= link_to 'Edit', edit_log_path(@log) %> |
-<%= link_to 'Back', logs_path %>
+<% if (@log.daily != false)%>
+    Daily Check: <%= @log.daily %> <br>
+<% end %>
+<% if (@log.monthly != false)%>
+    Monthly: <%= @log.monthly %> <br>
+<% end %>
+<% if (@log.halfyear != false)%>
+    Half-year: <%= @log.halfyear %> <br>
+<% end %>
+<% if (@log.annual != false)%>
+    Annual: <%= @log.annual %> <br>
+<% end %>
+<% if (@log.comment != nil)%>
+    comment: <%= @log.comment %> <br>
+<% end %>
