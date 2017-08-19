@@ -16,6 +16,7 @@ gem 'jquery-rails'
 gem 'jquery-turbolinks'
 gem 'gon'
 gem 'nokogiri'
+gem 'bootstrap', '~> 4.0.0.alpha6'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.2'
