@@ -54,10 +54,14 @@
 
   <%= render :partial => 'photos/photoform' %>
 
-  <% if @photos != nil %>
-  <!-- photos each loop - wrap in div -->
-      <%= image_tag(@photos[0].image.url) %>
-  <% end %>
+    <div class="photos-container">
+        <% if @photos != nil %>
+              <% @photos.each do |photo| %>
+            <!-- photos each loop - wrap in div -->
+                  <%= image_tag(photo[0].image.url) %>
+              <% end %>
+        <% end %>
+    </div>
 
   <div id="ratings-area">
     <% if @reports.length > 0 %>

@@ -54,8 +54,7 @@ class TrailsController < ApplicationController
     @photos = Photo.where(trail_id: session[:trail_id])
 
     puts "@photos: #{@photos}"
-
-    puts "***== @trail.inspect, #{@trail.inspect} ==***"
+    puts "***== @trail.inspect: #{@trail.inspect} ==***"
     puts "@surface_avg: #{@surface_avg}"
     puts "@traffic_avg: #{@wine_avg}"
     puts "@scenery_avg: #{@scenery_avg}"
@@ -82,11 +81,11 @@ class TrailsController < ApplicationController
 
     respond_to do |format|
       if @photo.save
-        puts "+++ Photo Success +++"
+        puts "+++ Trail Photo Success +++"
         format.html { redirect_to trail_path(session[:trail_id]), notice: 'Photo was successfully created.' }
         format.json { render :show, status: :created, location: @photo }
       else
-        puts "+++ Photo Failure +++"
+        puts "+++ Trail Photo Failure +++"
         format.html { render :new, notice: 'Photo was not added.' }
         format.json { render json: @photo.errors, status: :unprocessable_entity }
       end

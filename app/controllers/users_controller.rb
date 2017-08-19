@@ -234,6 +234,7 @@ class UsersController < ApplicationController
     def set_user
       puts "\n******** set_user ********"
       @user = User.find(params[:id])
+    #   @user = User.find(current_user.id)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

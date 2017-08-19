@@ -13,19 +13,29 @@
     <link href="https://fonts.googleapis.com/css?family=Amaranth|Raleway|Croissant+One|Shrikhand" rel="stylesheet"> -->
   </head>
   <body>
-    <div id="menu_container">
-        <%= render :partial => "/users/menu" %>
-    </div>
-    <div id="yield-container">
-        <%= yield %>
-    </div>
-    <div id="footer">
-    <% if notice %>
-        <p id="notice"> <%= notice %> </p>
-    <% end %>
-    <% if alert %>
-        <p id ="alert"> <%= alert %> </p>
-    <% end %>
+
+    <div class="top-container">
+        <div class="row">
+            <div id="menu_container" class="col-12">
+                <%#= render :partial => "/users/menu" %>
+                <%= render :partial => "/users/navbar" %>
+            </div>
+        </div>
+        <div class="row">
+            <div id="yield-container" class="col-12">
+                <%= yield %>
+            </div>
+        </div>
+        <div class="row">
+            <div id="footer" class="col-12">
+            <% if notice %>
+                <p id="notice"> <%= notice %> </p>
+            <% end %>
+            <% if alert %>
+                <p id ="alert"> <%= alert %> </p>
+            <% end %>
+            </div>
+        </div>
     </div>
   </body>
 </html>
