@@ -1,45 +1,22 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/">ciclo</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-
-        <% if current_user %>
-            <li class="nav-item active">
-              <a class="nav-link"><%= link_to 'Home', landing_path %></a>
-              <a class="nav-link"><%= link_to 'Weather', weather_path %></a>
-              <a class="nav-link"><%= link_to 'Trails', trails_path %></a>
-              <a class="nav-link"><%= link_to 'Log',  user_logs_path(current_user.id) %></a>
-              <a class="nav-link"><%= link_to 'Profile', user_path(current_user.id) %></a>
-              <a class="nav-link"><%= link_to 'Sign Out', destroy_user_session_path %></a>
-            </li>
-        <% elsif current_admin %>
-            <li class="nav-item active">
-                <a class="nav-link"><%= link_to 'Admin', admin_landing_path %></a>
-                <a class="nav-link"><%= link_to 'Seed', seed_path %></a>
-                <a class="nav-link"><%= link_to 'Users', "/users" %></a>
-                <a class="nav-link"><%= link_to 'Trails', "/trails" %></a>
-                <a class="nav-link"><%= link_to 'Reports', "/admin_reports" %></a>
-                <a class="nav-link"><%= link_to 'Tags', tags_path %></a>
-                <a class="nav-link"><%= link_to 'Counties', "/counties" %></a>
-                <a class="nav-link"><%= link_to 'Signout', destroy_admin_session_path, method: :delete %></a>
-            </li>
-        <% else %>
-            <li class="nav-item active">
-                <a class="nav-link"><%= link_to 'Sign In', new_user_session_path %></a>
-                <a class="nav-link"><%= link_to 'Register', new_user_registration_path %></a>
-            </li>
-        <% end %>
-    </ul>
-  </div>
+<nav id="menu-example" class="burgermenu-left">
+  <ul>
+    <li><a href="#">Home</a></li>
+    <li class="has-children">
+      <a href="#">Slide Panel Submenu</a>
+      <ul class="is-children">
+        <li class="back"><a href="#">&lt; Back</a></li>
+        <li><a href="#">Submenu element</a></li>
+        <li><a href="#">Submenu element</a></li>
+        <li><a href="#">Submenu element</a></li>
+      </ul>
+    </li>
+    <li class="dropdown">
+      <a href="#">Dropdown Submenu</a>
+      <ul>
+        <li><a href="#">Dropdown element</a></li>
+        <li><a href="#">Dropdown element</a></li>
+        <li><a href="#">Dropdown element</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
-
-<!-- <li class="nav-item">
-  <a class="nav-link" href="#">Link</a>
-</li>
-<li class="nav-item">
-  <a class="nav-link disabled" href="#">Disabled</a>
-</li> -->
