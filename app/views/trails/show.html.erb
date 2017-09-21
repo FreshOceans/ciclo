@@ -7,7 +7,7 @@
         <p id="trail-name"><%= @trail.name %></p>
       </div>
       <div id="trail-length-container">
-        <p id="trail-length"><%= @trail.length %>mi</p>
+        <p id="trail-length"><%= @trail.length.round(3) %>mi</p>
       </div>
       <div id="trail-surface-container">
         <p id="trail-surface"><%= @trail.surface %></p>
@@ -18,10 +18,9 @@
         <% end %>
       </div>
 
-      <!-- Average Bar Rating display - functions 100% -->
-        <!-- <div id="trail-rating-container">
-          <p id="trail-rating"><%= @rating_avg %></p>
-        </div> -->
+      <!-- <div id="trail-rating-container">
+          <p id="trail-rating"><%= @overall_rating_avg %></p>
+      </div> -->
 
       <div id="trail-rating-container">
         <div id="trail-icon-wrapper">
@@ -49,9 +48,16 @@
       </div>
     </div>
 
-    <div id="map_container">
+    <div id="map_canvas">
     </div>
   </div>
+
+  <%= render :partial => 'photos/photoform' %>
+
+  <% if @photos != nil %>
+  <!-- photos each loop - wrap in div -->
+      <%= image_tag(@photos[0].image.url) %>
+  <% end %>
 
   <div id="ratings-area">
     <% if @reports.length > 0 %>

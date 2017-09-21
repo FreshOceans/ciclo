@@ -1,19 +1,17 @@
 # ======= ======= ======= wunderground.rb ======= ======= =======
 module Wunderground
 
-    # BASE_SEARCH_URL = "http://api.wunderground.com/api/4ac6165543934cf3/animatedradar/q/MI/Ann_Arbor.gif?newmaps=1&timelabel=1&timelabel.y=10&num=5&delay=50"
+    BASE_SEARCH_URL = "http://api.wunderground.com/api/"
 
-    def self.animated_radar_api_response()
+    def self.animated_radar_api_response(search_radar)
         puts "\n******* WeatherUnderground:animated_radar_api_response *******"
 
-        base_search_url = "http://api.wunderground.com/api/4ac6165543934cf3/animatedradar/q/"
-        location = "VA/Alexandria"
-        params = "newmaps=1&timelabel=1&timelabel.y=10&num=5&delay=50"
-        url_array = [base_search_url, location, ".png?", params]
-        url_array.join
-        puts "url_array.join: #{url_array.join}"
+        remote_url = BASE_SEARCH_URL
+        remote_url += search_radar
 
-        HTTParty.get(url_array.join)
+        puts "+*** remote_url: #{remote_url.inspect} ***+"
+        response = HTTParty.get(remote_url)
+        return response
     end
 
 end

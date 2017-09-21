@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   # include Wunderground
+  include Google_places
 
   # == GET /home
   def home
@@ -12,17 +13,140 @@ class UsersController < ApplicationController
     # puts "*** current_user[:id].inspect: #{current_user[:id].inspect} ****"
   end
 
+  # ==== Google Places API: Bicycle Shops ====
+  # GET /find_bicycle_shops_ajax
+  def find_bicycle_shops_ajax
+    # gon.shop_presence = true
+    puts "\n******* find_bicycle_shops_ajax *******"
+    # puts "find_bicycle_shops_ajax_params.inspect: #{find_bicycle_shops_ajax_params.inspect}"
+    puts "params.inspect #{params.inspect}"
+    permitted_params = find_bicycle_shops_ajax_params
+    # puts "== permitted_params.inspect: #{permitted_params.inspect}"
+    geolocation = permitted_params[:lat] +  "," + permitted_params[:lng]
+    puts "geolocation: #{geolocation}"
+
+    permitted_lat = permitted_params[:lat].to_f
+    permitted_lng = permitted_params[:lng].to_f
+    @position_lat = permitted_lat
+    puts "@position_lat: #{@position_lat}"
+    @position_lng = permitted_lng
+    puts "@position_lng: #{@position_lng}"
+
+    search_bicycle_shops = find_local_bicycle_shops(geolocation)
+    json_data = Google_places.places_api_response(search_bicycle_shops)
+    @place_data_array = json_data['results']
+    puts "@@place_data_array, #{@place_data_array.inspect}"
+
+    # == map data source via google maps
+    # render "local_bicycle_shops_ajax"
+    respond_to do |format|
+        format.json {
+            render json: {:place_data_array => @place_data_array, :permitted_lat => @position_lat, :permitted_lng => @position_lng }
+        }
+    end
+  end
+
+  # GET /find_local_bicycle_shops
+  def find_local_bicycle_shops(geolocation)
+      puts "\n******* find_local_bicycle_shops *******"
+
+      # == search for bicycle_shops locations within 804meters(0.5mi) of geolocation
+      location = geolocation
+      puts "||| location: #{location} |||"
+      radius = "804"
+      types = "bicycle_shop"
+      name = "bike"
+      key = GOOGLE_PLACES_KEY
+
+      search_bicycle_shops = "location=" + location
+      search_bicycle_shops += "&radius=" + radius
+      search_bicycle_shops += "&types=" + types
+      search_bicycle_shops += "&name=" + name
+      search_bicycle_shops += "&key=" + key
+
+      puts "+=+ search_bicycle_shops.inspect #{search_bicycle_shops.inspect}+=+"
+
+      return search_bicycle_shops
+  end
+
+  # GET /make_local_map
+  def make_local_map
+      puts "\n******* make_local_map *******"
+
+      # == search for bicycle_shops locations within 804meters(0.5mi) of geolocation
+      location = get_lat_lon()
+
+      key = GOOGLE_MAPS_KEY
+      remote_url = "https://www.google.com/maps/embed/v1/place"
+      remote_url += "?key=" + key
+      remote_url += "&q=" + location
+      puts "remote_url: #{remote_url.inspect}"
+      return remote_url
+  end
+
+  # ===== Weather Underground API: Radar & Hourly Forecast ====
+  # GET /weather_underground
+  def weather_underground
+    puts "\n******** weather_underground ********"
+    gon.wu_presence = true
+    search_radar = wu_radar_constructor
+    puts "search_radar.inspect: #{search_radar.inspect}"
+    @wu_radar = wu_radar_constructor
+    puts "@wu_radar.inspect #{@wu_radar.inspect}"
+  end
+
+  # GET /wu_hourly_constructor
+  def wu_hourly_constructor
+      puts "\n******* wu_hourly_constructor *******"
+
+       base_search_url = "http://api.wunderground.com/api/"
+       key = WEATHER_UNDERGROUND_KEY
+       feature = "/hourly/q/"
+       location = "/DC/Washington.json"
+
+       search_hourly = base_search_url
+       search_hourly += key
+       search_hourly += feature
+       search_hourly += location
+
+       puts "+=+ search_hourly.inspect: #{search_hourly.inspect}+=+"
+
+       response = HTTParty.get(search_hourly)
+
+       respond_to do |format|
+           format.json {
+               render json: {:hourly_data => response}
+           }
+       end
+  end
+
+  # GET /wu_radar_constructor
+  def wu_radar_constructor
+      puts "\n******* wu_radar_constructor *******"
+
+      base_search_url = "http://api.wunderground.com/api/"
+      key = WEATHER_UNDERGROUND_KEY
+      feature = "/animatedradar/q/"
+      location = "/DC/Washington"
+      wu_format = ".gif?"
+      params = "newmaps=1&timelabel=1&timelabel.y=10&num=5&delay=50"
+
+      search_radar = base_search_url
+      search_radar += key
+      search_radar += feature
+      search_radar += location
+      search_radar += wu_format
+      search_radar += params
+
+      puts "+=+ search_radar.inspect #{search_radar.inspect}+=+"
+
+      return search_radar
+  end
+
   # == GET /landing
   def landing
     puts "\n******** landing ********"
     @user = User.find(current_user.id)
-  end
-
-  # == GET /weather_underground
-  def weather_underground
-    puts "\n******** weather_underground ********"
-    # @radar = Wunderground.animated_radar_api_response
-    puts "@radar.inspect #{@radar.inspect}"
   end
 
   # GET /check_user
@@ -116,5 +240,10 @@ class UsersController < ApplicationController
     def user_params
       puts "\n******** user_params ********"
     #   params.fetch(:user, {})
+    end
+
+    def find_bicycle_shops_ajax_params
+      puts "\n******** find_bicycle_shops_ajax_params ********"
+      params.permit(:lat, :lng)
     end
 end

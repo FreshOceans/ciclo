@@ -122,12 +122,15 @@ $break: 780px;
         font-size: 10px;
       }
     }
-    #map_container{
+    #map_canvas{
+      overflow: visible;
       box-sizing: border-box;
       border: $border;
       border-radius: 3px;
       height: 320px;
       width: 320px;
+      max-height: 100%;
+      max-width: 100%;
       box-shadow: $shadow;
       @media screen and (max-width: $break){
         margin-top: 20px;
@@ -366,5 +369,10 @@ $break: 780px;
         }
       }
     }
+  }
+  img {
+      height: 300px;
+      width: 300px;
+      background-size: contain;
   }
 }

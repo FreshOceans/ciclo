@@ -14,6 +14,9 @@ Rails.application.routes.draw do
   get "/landing" => "users#landing"
   get "/user_reports/:id" => "users#user_reports"
   get "/weather" => "users#weather_underground"
+  get "/find_bicycle_shops_ajax" => "users#find_bicycle_shops_ajax"
+  get "/wu_url" => "users#wu_hourly_constructor"
+  post "/create_trail_photo" => "trails#create_trail_photo"
 
   # = Admin Routes
   get "/admin" => "admins#home"
@@ -25,14 +28,15 @@ Rails.application.routes.draw do
   get "/counties" => "county#index"
   get "/seed" => "admins#trail_database"
 
-
   # == RESTful Routes
   resources :users do
      resources :reports
+     resources :logs
   end
   # resources :admins
   resources :trails
   resources :counties
   resources :photos
   resources :tags
+
 end
