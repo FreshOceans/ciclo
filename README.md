@@ -1,24 +1,22 @@
-# README
+# ciclo
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+ciclo's goal is to fullfill all the needs of a typical cyclist ranging from beginner to advanced. 
+Included are: 
+* Radar & Hourly forecast
+* Nearby bike shops 
+* Trails & trail reviews
+* Trail Gallery
+* Maintenance Log
+* Profiles
 
-Things you may want to cover:
+This community driven app helps a cyclist in ways they didn't know were possible.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Technologies
+* Ruby on Rails App
+* Javascript
+* jQuery for Javascript Library
+* Google API: Places & Javascript
+* Weather Underground API: Radar & Hourly Forecast
+* AWS: Hosting Images
+* Heroku: App Deployment
+* Devise: User & Admin
