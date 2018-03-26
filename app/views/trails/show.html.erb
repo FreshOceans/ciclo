@@ -52,12 +52,12 @@
     </div>
   </div>
 
-  <%= render :partial => 'photos/photoform' %>
+  <%#= render :partial => 'photos/photoform' %>
 
-  <% if @photos != nil %>
+  <%# if @photos != nil %>
   <!-- photos each loop - wrap in div -->
-      <%= image_tag(@photos[0].image.url) %>
-  <% end %>
+      <%#= image_tag(@photos[0].image.url) %>
+  <%# end %>
 
   <div id="ratings-area">
     <% if @reports.length > 0 %>
