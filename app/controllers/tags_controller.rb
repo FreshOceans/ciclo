@@ -45,7 +45,7 @@ class TagsController < ApplicationController
     puts "\n******** tags_update ********"
     respond_to do |format|
       if @tag.update(tag_params)
-        format.html { redirect_to tags_path,, notice: 'Tag was successfully updated.' }
+        format.html { redirect_to tags_path, notice: 'Tag was successfully updated.' }
         format.json { render :show, status: :ok, location: @tag }
       else
         format.html { render :edit }
