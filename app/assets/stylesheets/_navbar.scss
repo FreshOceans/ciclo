@@ -1,0 +1,86 @@
+// FONT
+$amaranth: 'Amaranth', sans-serif;
+$croissant-one: "Croissant One", cursive;
+$shrikhand: "Shrikhand", cursive;
+$bg-color: #e6e6e6;
+$logo-color: #002266;
+$shadow: 0 2px 4px rgba(0,0,0,0.3);
+
+
+// COLORS
+$button-bg: #002266;
+$button-hover: #66a3ff;
+$button-active: #001133;
+$break: 780px;
+
+#navbar{
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  box-sizing: border-box;
+  height: 70px;
+  width: 100%;
+  background-color: $bg-color;
+  padding: 10px;
+  box-shadow: $shadow;
+  @media screen and (max-width: $break){
+    height: 110px;
+  }
+  #logo{
+    float: left;
+    color: $logo-color;
+    font-family: $croissant-one;
+    font-style: italic;
+    margin: 0;
+    @media screen and (max-width: $break){
+      width: 100%;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+  }
+
+  #nav-items{
+    float: right;
+    height: 60px;
+    @media screen and (max-width: $break){
+      float: none;
+      text-align: center;
+    }
+      a{
+        display: inline-block;
+        box-sizing: border-box;
+        text-align: center;
+        height: 40px;
+        width: 90px;
+        margin: 5px;
+        background-color: $button-bg;
+        box-shadow: $shadow;
+        font-size: 18px;
+        outline: none;
+        text-transform: uppercase;
+        color: white;
+        font-family: $amaranth;
+        border: none;
+        border-radius: 4px;
+        text-decoration: none;
+        line-height: 40px;
+        @media screen and (max-width: $break){
+          height: 30px;
+          width: 75px;
+          margin: 2px;
+          font-size: 14px;
+          line-height: 30px;
+        }
+        &:hover{
+          background-color: $button-hover;
+        }
+        &:active{
+          background-color: $button-active;
+          transform: translate(2px, 2px);
+          box-shadow: 0 0 0 rgba(0,0,0,0.3);
+        }
+      }
+
+  }
+}

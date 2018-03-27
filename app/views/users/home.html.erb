@@ -1,1 +1,36 @@
-<h1>Home</h1>
+<div id="home-wrapper">
+  <div class="section" id="top-section">
+    <div class="top-box">
+      <div class="top">
+        <%= image_tag("/assets/road.png", id: "road-img") %>
+      </div>
+      <div class="bottom-phrase">Rate Trails</div>
+    </div>
+    <div class="top-box">
+      <div class="top">
+        <%= image_tag("/assets/review.png", id: "review-img") %>
+      </div>
+      <div class="bottom-phrase">Write Trail Reviews</div>
+    </div>
+    <div class="top-box">
+      <div class="top">
+      <%= image_tag("/assets/search.png") %>
+    </div>
+      <div class="bottom-phrase">Search for Trails</div>
+    </div>
+  </div>
+  <div class="section" id="middle-section">
+    <div class="middle-box" id="quotes-area">
+      <p class="quote">"Whenever I need to quickly find a nearby trail approved by the community. Now there is <em>ciclo!"</em></p>
+      <p class="signature">- Val, Arlington, VA</p>
+    </div>
+    <div class="middle-box" id="app-image-area">
+      <%= image_tag("/assets/app-img.png", id: "app-img") %>
+    </div>
+  </div>
+
+  <div class="section" id="bottom-section">
+    <h2 id="phrase-section">Please cycle safely</h2>
+    <a href="https://github.com/FreshOceans/ciclo" target="_blank"><%= image_tag("/assets/github.png") %></a>
+  </div>
+</div>

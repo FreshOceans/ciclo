@@ -10,7 +10,7 @@
         <%= link_to 'Log',  user_logs_path(current_user.id), class: "nav-item" %>
         <%= link_to 'Profile', user_path(current_user.id), class: "nav-item" %>
         <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: "nav-item" %>
-        <%= current_user.username %>
+        <!-- <%= current_user.username %> -->
     <% elsif current_admin %>
         <%= link_to 'Admin', admin_landing_path, class: "nav-item" %>
         <%= link_to 'Seed', seed_path, class: "nav-item" %>

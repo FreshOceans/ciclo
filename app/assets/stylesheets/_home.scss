@@ -1,0 +1,119 @@
+$border: 1px solid #e6e6e6;
+$shadow: 0 0 4px rgba(0,0,0,0.3);
+$amaranth: 'Amaranth', sans-serif;
+$raleway: 'Raleway', sans-serif;
+$croissant-one: "Croissant One", cursive;
+$primary: #e6e6e6;
+$font-color: #002266;
+$fringe: 1px solid #99c2ff;
+$button-bg: #ff3333;
+$button-hover: #ff6666;
+$button-active: #e60000;
+$break: 780px;
+
+#home-wrapper{
+  .section{
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-around;
+    flex-flow: row wrap;
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+    @media screen and (max-width: $break){
+      width: 360px;
+    }
+    .top-box{
+      box-sizing: border-box;
+      height: 200px;
+      width: 200px;
+      text-align: center;
+      font-family: $amaranth;
+      color: $font-color;
+      @media screen and (max-width: $break){
+        width: 300px;
+        height: 300px;
+        padding: 10px;
+        border-bottom: 1px solid $primary;
+      }
+      .top{
+        height: 150px;
+        text-align: center;
+        img{
+          height: 60px;
+          margin: 50px 0;
+        }
+      }
+      .bottom-phrase{
+        font-size: 19px;
+      }
+    }
+    .middle-box{
+      width: 300px;
+      height: 300px;
+      @media screen and (max-width: $break){
+        padding: 10px;
+        margin-bottom: 20px;
+      }
+    }
+    #quotes-area{
+      // border-right: 1px solid gray;
+      .quote{
+        margin-top: 80px;
+        font-family: $raleway;
+        font-size: 20px;
+        line-height: 30px;
+        @media screen and (max-width: $break){
+          margin-top: 20px;
+        }
+      }
+      .signature{
+        font-family: $amaranth;
+        font-size: 20px;
+        text-align: right;
+        color: $font-color;
+      }
+    }
+    #app-image-area{
+      box-sizing: border-box;
+      box-shadow: $shadow;
+      border: 1px solid $primary;
+      #app-img{
+        height: 100%;
+
+      }
+    }
+  }
+  #top-section{
+    border-bottom: 1px solid $primary;
+    @media screen and (max-width: $break){
+      padding: 20px;
+      border-bottom: none;
+    }
+    #road-img{
+      height: 100px;
+      margin: 30px 0;
+    }
+  }
+  #middle-section{
+    border-bottom: 1px solid $primary;
+  }
+  #bottom-section{
+    display: block;
+    text-align: center;
+    @media screen and (max-width: $break){
+      padding: 20px;
+    }
+    #phrase-section{
+      font-family: $croissant-one;
+      font-style: italic;
+      color: $font-color;
+    }
+    a{
+      text-decoration: none;
+      img{
+        height: 40px;
+      }
+    }
+  }
+}
