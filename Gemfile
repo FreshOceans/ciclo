@@ -14,7 +14,7 @@ gem 'aws-sdk'
 gem 'httparty'
 gem 'jquery-rails'
 gem 'jquery-turbolinks'
-gem 'nokogiri'
+gem 'nokogiri', '~> 1.8.2'
 gem 'gon'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
