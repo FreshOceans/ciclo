@@ -1,11 +1,13 @@
 <div id="landing_info">
     <% if @user.fname || @user.lname != nil %>
         <h2>Welcome Back, <%= @user.fname %> <%= @user.lname %>!</h2>
-        <p>Need to find a bike shop? Click on the link below.</p>
+        <!-- <p>Need to find a bike shop? Click on the link below.</p> -->
     <% end %>
 </div>
 
-<p id="shops_link" class="nav-item">Bike Shops</p>
+<div id="shops">
+    <p id="shops_link" class="nav-item">Bike Shops</p>
+</div>
 
 <div id="shops_map"></div>
 <div id="shops_info"></div>

@@ -48,14 +48,14 @@ $break: 780px;
         font-size: 19px;
       }
     }
-    .middle-box{
-      width: 300px;
-      height: 300px;
-      @media screen and (max-width: $break){
-        padding: 10px;
-        margin-bottom: 20px;
-      }
-    }
+    // .middle-box{
+    //   width: 300px;
+    //   height: 300px;
+    //   @media screen and (max-width: $break){
+    //     padding: 10px;
+    //     margin-bottom: 20px;
+    //   }
+    // }
     #quotes-area{
       // border-right: 1px solid gray;
       .quote{
