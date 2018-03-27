@@ -13,12 +13,12 @@ Rails.application.configure do
   WEATHER_UNDERGROUND_KEY    = ENV['WEATHER_UNDERGROUND_KEY']
   DEVISE_KEY_BASE            = ENV['DEVISE_KEY_BASE']
 
-  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
 
+  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
   if ENV["RAILS_LOG_TO_STDOUT"].present?
-  logger           = ActiveSupport::Logger.new(STDOUT)
-  logger.formatter = config.log_formatter
-  config.logger = ActiveSupport::TaggedLogging.new(logger)
+    logger           = ActiveSupport::Logger.new(STDOUT)
+    logger.formatter = config.log_formatter
+    config.logger = ActiveSupport::TaggedLogging.new(logger)
   end
 
   # Code is not reloaded between requests.
