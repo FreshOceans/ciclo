@@ -1,6 +1,26 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  config.secret_key_base     = ENV["SECRET_KEY_BASE"]
+  S3_REGION                  = ENV["S3_REGION"]
+  S3_BUCKET                  = ENV["S3_BUCKET"]
+  AWS_ACCESS_KEY_ID          = ENV["AWS_ACCESS_KEY_ID"]
+  AWS_SECRET_ACCESS_KEY      = ENV["AWS_SECRET_ACCESS_KEY"]
+  GOOGLE_PLACES_KEY          = ENV['GOOGLE_PLACES_KEY']
+  GOOGLE_JS_KEY              = ENV['GOOGLE_JS_KEY']
+  GOOGLE_MAPS_KEY            = ENV['GOOGLE_MAPS_KEY']
+  GOOGLE_DIRECTIONS_KEY      = ENV['GOOGLE_DIRECTIONS_KEY']
+  WEATHER_UNDERGROUND_KEY    = ENV['WEATHER_UNDERGROUND_KEY']
+  DEVISE_KEY_BASE            = ENV['DEVISE_KEY_BASE']
+
+  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
+
+  if ENV["RAILS_LOG_TO_STDOUT"].present?
+  logger           = ActiveSupport::Logger.new(STDOUT)
+  logger.formatter = config.log_formatter
+  config.logger = ActiveSupport::TaggedLogging.new(logger)
+  end
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
