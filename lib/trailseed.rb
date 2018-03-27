@@ -1,5 +1,5 @@
 # ======= ======= ======= trail_seed.rb ======= ======= =======
-require 'Nokogiri'
+# require 'Nokogiri'
 require 'JSON'
 
 module Trailseed
